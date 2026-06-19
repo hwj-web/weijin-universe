@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA · 启明 — He Weijin Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4EDE2;
+    --paper: #FBF8F2;
+    --ink: #1A1815;
+    --ink-soft: #4A4540;
+    --ink-faded: #8B857C;
+    --ink-line: rgba(26, 24, 21, 0.1);
+    --sage: #94B398;
+    --sage-deep: #6D8E72;
+    --peach: #EBC4A6;
+    --peach-deep: #D29F7C;
+    --lavender: #B5B0D8;
+    --lavender-deep: #8782B8;
+    --chrome: linear-gradient(135deg, #C9CED6 0%, #FAFAFA 25%, #A5ACBA 50%, #FFFFFF 75%, #B5BCC8 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Noto Sans SC', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 100;
+    opacity: 0.55; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    mix-blend-mode: difference;
+    color: #fff;
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400; font-size: 13px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .nav-mark em { font-style: italic; font-weight: 300; }
+  .nav-mark .cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px; letter-spacing: 0.2em;
+    font-weight: 400; text-transform: none;
+    opacity: 0.8;
+  }
+  .nav-back {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff; text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: gap 0.3s ease;
+  }
+  .nav-back:hover { gap: 16px; }
+  .nav-back .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+  }
+
+  /* === Planet Hero === */
+  .planet-hero {
+    min-height: 100vh;
+    padding: 100px 7vw 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .planet-hero-content {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 14px;
+    animation: fadeUp 1s 0.2s both;
+  }
+  .breadcrumb::before {
+    content: ''; width: 48px; height: 1px;
+    background: var(--ink-soft);
+  }
+  .breadcrumb .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.2em;
+  }
+
+  .planet-title-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 48px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .planet-roman {
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-weight: 300;
+    font-size: clamp(60px, 9vw, 144px);
+    line-height: 0.85;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+    animation: fadeUp 1.2s 0.4s both;
+  }
+  .planet-title-block { flex: 1; min-width: 300px; animation: fadeUp 1.2s 0.5s both; }
+  .planet-title-en {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(80px, 14vw, 220px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 80;
+  }
+  .planet-title-en .star {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    background: var(--chrome);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .planet-title-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(28px, 3vw, 48px);
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 16px;
+    letter-spacing: 0.1em;
+    animation: fadeUp 1.2s 0.7s both;
+  }
+  .planet-category-row {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 1.2s 0.8s both;
+  }
+  .planet-category-row .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+  }
+
+  .planet-tagline {
+    margin-top: 64px;
+    max-width: 640px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.8;
+    color: var(--ink-soft);
+    animation: fadeUp 1.2s 0.9s both;
+  }
+  .planet-tagline em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  /* 浮动星球+轨道 */
+  .hero-planet {
+    position: absolute;
+    top: 50%; right: 5%;
+    transform: translateY(-50%);
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: 
+      radial-gradient(circle at 30% 25%, #D5D1ED 0%, var(--lavender) 35%, var(--lavender-deep) 75%, #5F5A99 100%);
+    box-shadow: 
+      0 80px 160px -40px rgba(135, 130, 184, 0.55),
+      inset -20px -30px 60px rgba(0, 0, 0, 0.18);
+    animation: rotate 80s linear infinite, fadeIn 2s 0.6s both;
+    z-index: -1;
+    opacity: 0.85;
+  }
+  .hero-orbit {
+    position: absolute;
+    top: 50%; right: 5%;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed rgba(135, 130, 184, 0.25);
+    z-index: -1;
+    animation: fadeIn 2.5s 1s both;
+  }
+  .hero-orbit-1 {
+    width: 540px; height: 540px;
+    margin-right: 210px;
+  }
+  .hero-orbit-2 {
+    width: 680px; height: 680px;
+    margin-right: 210px;
+    border-color: rgba(135, 130, 184, 0.12);
+  }
+
+  /* 快速数据条 */
+  .quick-stats {
+    position: relative;
+    margin-top: 96px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--ink-line);
+    padding-top: 28px;
+    animation: fadeUp 1.2s 1.1s both;
+    flex-wrap: wrap;
+    gap: 32px 24px;
+  }
+  .qstat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .qstat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 30px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .qstat-num em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .qstat-num .unit {
+    font-size: 0.55em;
+    margin-left: 2px;
+  }
+  .qstat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .qstat-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+    color: var(--ink-soft);
+    font-size: 10px;
+  }
+
+  /* === Section通用 === */
+  .section {
+    padding: 14vh 7vw;
+    position: relative;
+  }
+  .section-header {
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .section-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.2em;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 80px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-align: right;
+    max-width: 60%;
+    font-variation-settings: "SOFT" 80;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .section-title .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.42em;
+    margin-top: 12px;
+    color: var(--ink-soft);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  /* === Projects List === */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+  }
+  
+  .project {
+    display: grid;
+    grid-template-columns: 180px 1fr 1.4fr;
+    gap: 48px;
+    padding: 48px 0;
+    border-top: 1px solid var(--ink-line);
+    align-items: start;
+  }
+  .project:hover .project-num {
+    color: var(--lavender-deep);
+    transform: translateX(8px);
+  }
+  
+  .project-num-block {
+    position: sticky;
+    top: 100px;
+  }
+  .project-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 56px;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+    line-height: 1;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    letter-spacing: -0.02em;
+  }
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 18px;
+    line-height: 1.6;
+  }
+  .project-tag span {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .project-left {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .project-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(24px, 2.4vw, 32px);
+    line-height: 1.25;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .project-title-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 20px);
+    color: var(--ink-soft);
+    font-variation-settings: "SOFT" 100;
+    line-height: 1.3;
+  }
+  .project-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .project-meta-row {
+    display: flex;
+    gap: 8px;
+  }
+  .project-meta-row .label {
+    color: var(--ink-faded);
+    min-width: 56px;
+  }
+  .project-meta-row .value {
+    color: var(--ink-soft);
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: none;
+  }
+
+  .project-right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .project-body p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .project-body strong {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .project-body em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .project-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink-line);
+    border-radius: 14px;
+  }
+  .pres-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .pres-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .pres-num em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .pres-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 4px;
+  }
+  .pres-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  /* 视觉占位（旧版单方框，保留作为后备） */
+  .project-visual {
+    aspect-ratio: 16/9;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #EFE7D8 0%, #DBD0BD 100%);
+    border: 1px solid var(--ink-line);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(181, 176, 216, 0.4) 0%, transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(148, 179, 152, 0.3) 0%, transparent 55%);
+  }
+  .project-visual-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .project-visual-text .icon {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+    margin-bottom: 6px;
+  }
+  .project-visual-text .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .project-visual-text .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    margin-top: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ============================================
+     视觉拼贴网格系统 — 每个方框可独立放图片/文字
+     用于填充 P2 等大空白区域，灵感来自 Image 3
+  ============================================ */
+  .visual-grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  /* 布局变体 */
+  .visual-grid.layout-3-stack {
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .visual-grid.layout-3-stack .slot:nth-child(1) {
+    grid-row: 1 / 3;
+  }
+  .visual-grid.layout-2-equal {
+    grid-template-columns: 1fr 1fr;
+  }
+  .visual-grid.layout-1-wide {
+    grid-template-columns: 1fr;
+  }
+
+  /* 单个 slot — 可装图片或文字 */
+  .slot {
+    border-radius: 14px;
+    border: 1px solid var(--ink-line);
+    overflow: hidden;
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+  }
+  .slot.slot-tall { aspect-ratio: 3/4; }
+  .slot.slot-wide { aspect-ratio: 16/9; }
+  .slot.slot-square { aspect-ratio: 1/1; }
+
+  /* 图片 slot — 用渐变占位（未来替换为真实图片） */
+  .slot-image {
+    background: linear-gradient(135deg, #EFE7D8 0%, #DBD0BD 100%);
+    position: relative;
+  }
+  .slot-image::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--slot-bg, 
+      radial-gradient(circle at 30% 30%, rgba(181, 176, 216, 0.4) 0%, transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(148, 179, 152, 0.3) 0%, transparent 55%));
+  }
+  .slot-image .slot-label {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    z-index: 2;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: rgba(251, 248, 242, 0.92);
+    padding: 4px 9px;
+    border: 1px solid var(--ink-line);
+    border-radius: 3px;
+  }
+  .slot-image .slot-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    margin-left: 4px;
+  }
+  /* 不同色调的图片 slot */
+  .slot-tone-lavender { 
+    --slot-bg: radial-gradient(circle at 30% 30%, rgba(181, 176, 216, 0.55) 0%, transparent 60%),
+               linear-gradient(135deg, #EDE6F4 0%, #B5AED8 100%);
+  }
+  .slot-tone-sage {
+    --slot-bg: radial-gradient(circle at 40% 35%, rgba(151, 175, 142, 0.5) 0%, transparent 65%),
+               linear-gradient(135deg, #E6EFE0 0%, #97AF8E 100%);
+  }
+  .slot-tone-peach {
+    --slot-bg: radial-gradient(circle at 70% 30%, rgba(229, 184, 154, 0.55) 0%, transparent 60%),
+               linear-gradient(135deg, #FBF1E4 0%, #E5B89A 80%);
+  }
+  .slot-tone-paper {
+    --slot-bg: repeating-linear-gradient(0deg, transparent 0px, transparent 10px, rgba(21,19,15,0.04) 10px, rgba(21,19,15,0.04) 11px),
+               linear-gradient(135deg, #FBF7EE 0%, #E8DECC 100%);
+  }
+  .slot-tone-dark {
+    --slot-bg: linear-gradient(135deg, #1A1815 0%, #3B3848 100%);
+  }
+  .slot-tone-dark .slot-label {
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  /* 文字 slot — 灵活装文字内容 */
+  .slot-text {
+    background: var(--paper);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .slot-text-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 10px;
+  }
+  .slot-text-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-size: 10px;
+  }
+  .slot-text-body {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+  .slot-text-body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .slot-text-body em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  /* 大字数据型文字slot */
+  .slot-text.slot-text-stat {
+    align-items: flex-start;
+    justify-content: center;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .slot-text-stat .slot-text-label {
+    color: rgba(229, 184, 154, 0.75);
+  }
+  .slot-text-stat .stat-num-big {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 80;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .slot-text-stat .stat-num-big em {
+    font-style: italic;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+  }
+  .slot-text-stat .stat-cap {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  /* Pull quote 引述 slot — 杂志大引号 */
+  .slot-quote {
+    background: var(--paper);
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slot-quote::before {
+    content: '"';
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+    font-size: 56px;
+    line-height: 0.4;
+    color: var(--peach-deep);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .slot-quote-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 1.45;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .slot-quote-text em {
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .slot-quote-text .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-style: normal;
+    font-size: 0.7em;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .visual-grid.layout-3-stack,
+    .visual-grid.layout-2-equal {
+      grid-template-columns: 1fr;
+    }
+    .visual-grid.layout-3-stack .slot:nth-child(1) {
+      grid-row: auto;
+    }
+  }
+
+  /* === 证书展示 === */
+  .certs {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14vh 7vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .certs::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(181, 176, 216, 0.2) 0%, transparent 65%);
+    filter: blur(60px);
+  }
+
+  .certs-header {
+    margin-bottom: 80px;
+    position: relative; z-index: 1;
+  }
+  .certs-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 20px;
+    display: flex; gap: 8px;
+  }
+  .certs-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .certs-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 70%;
+    font-variation-settings: "SOFT" 80;
+  }
+  .certs-title em {
+    font-style: italic;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative; z-index: 1;
+  }
+  .cert-card {
+    padding: 0;
+    border: 1px solid rgba(244, 237, 226, 0.2);
+    border-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    background: rgba(244, 237, 226, 0.03);
+    display: flex;
+    flex-direction: column;
+  }
+  .cert-card::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--chrome);
+    opacity: 0.15;
+    transition: all 0.5s ease;
+    z-index: 2;
+  }
+  .cert-card:hover {
+    border-color: rgba(244, 237, 226, 0.5);
+    transform: translateY(-5px);
+    background: rgba(244, 237, 226, 0.06);
+  }
+  .cert-card:hover::before {
+    opacity: 0.3;
+    transform: scale(1.2);
+  }
+  .cert-image-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(244, 237, 226, 0.15);
+  }
+  .cert-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: block;
+  }
+  .cert-card:hover .cert-image-wrap img {
+    transform: scale(1.04);
+  }
+  .cert-body {
+    padding: 24px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cert-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+    margin-bottom: 4px;
+  }
+  .cert-issuer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .cert-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .cert-name-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    opacity: 0.7;
+    font-variation-settings: "SOFT" 100;
+  }
+
+  /* === Next Planet === */
+  .next-planet {
+    padding: 14vh 7vw;
+    background: var(--paper);
+    border-top: 1px solid var(--ink-line);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .next-orb {
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #F2D5C0 0%, var(--peach) 50%, var(--peach-deep) 100%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.18;
+    filter: blur(40px);
+  }
+  .next-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; gap: 8px;
+  }
+  .next-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .next-link {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 10vw, 144px);
+    line-height: 0.95;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.04em;
+    font-variation-settings: "SOFT" 80;
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative; z-index: 1;
+  }
+  .next-link em {
+    font-style: italic;
+    color: var(--peach-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .next-link:hover {
+    transform: translateX(20px);
+  }
+  .next-link::after {
+    content: '→';
+    margin-left: 24px;
+    color: var(--peach-deep);
+  }
+  .next-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-top: 18px;
+    letter-spacing: 0.12em;
+    position: relative; z-index: 1;
+    font-weight: 500;
+  }
+
+  footer {
+    padding: 36px 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--ink-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+  }
+
+  /* WIP banner */
+  .wip-banner {
+    background: linear-gradient(90deg, var(--peach) 0%, var(--lavender) 100%);
+    color: var(--ink);
+    padding: 14px 7vw;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    margin-top: 80px;
+  }
+  .wip-banner .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.15em;
+    margin-left: 8px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-50%) scale(0.6); }
+    to { opacity: 0.85; transform: translateY(-50%) scale(1); }
+  }
+  @keyframes rotate {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .planet-title-row { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .hero-planet { width: 240px; height: 240px; right: -50px; opacity: 0.4; }
+    .hero-orbit-1, .hero-orbit-2 { display: none; }
+    .quick-stats { position: relative; bottom: auto; left: 0; right: 0; margin-top: 60px; gap: 24px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .section-title { text-align: left; max-width: 100%; }
+    .project { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
+    .project-num-block { position: relative; top: auto; }
+    .certs-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================
+     TECH DOSSIER — 图 4 卷宗版式（仅用于 MLLM 项目）
+  ============================================ */
+  .tech-dossier {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 6px 6px 0 var(--ink-line);
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 48px;
+    margin-top: 8px;
+  }
+  .tech-dossier-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 12px;
+  }
+  .tech-dossier-header-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .tech-dossier-header-left .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.14em;
+    display: block;
+    margin-top: 4px;
+    color: var(--ink-soft);
+  }
+  .tech-dossier-header-right {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: 16px;
+    color: var(--peach-deep);
+    padding: 4px 12px;
+    border: 1px solid var(--peach-deep);
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+  }
+  .tech-spec {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px 18px;
+    align-items: baseline;
+  }
+  .tech-spec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    padding-top: 2px;
+  }
+  .tech-spec-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-size: 10px;
+  }
+  .tech-spec-value {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.55;
+  }
+  .tech-spec-value .en {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    color: var(--ink-soft);
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .tech-spec-value .chips-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 6px;
+  }
+  .tech-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    padding: 3px 10px;
+    border: 1px solid var(--ink-line);
+    border-radius: 100px;
+    text-transform: uppercase;
+    background: var(--paper);
+  }
+  .tech-dossier-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .tech-pull-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    padding-left: 24px;
+    border-left: 3px solid var(--peach-deep);
+    margin: 0;
+  }
+  .tech-pull-quote::before {
+    content: '"';
+    display: block;
+    font-size: 1.2em;
+    color: var(--peach-deep);
+    line-height: 0.4;
+    margin-bottom: 12px;
+  }
+  .tech-pull-quote em {
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .tech-pull-quote .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-style: normal;
+    font-size: 0.62em;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .tech-dossier-right p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+  .tech-dossier-right p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .tech-dossier-right p em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .tech-demo-frame {
+    aspect-ratio: 16/7;
+    border: 1px solid var(--ink);
+    background: linear-gradient(135deg, #B8BFC9 0%, #F4F4F0 25%, #94A0B0 50%, #FFFFFF 75%, #A0AAB8 100%);
+    border-radius: 4px;
+    position: relative;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .tech-demo-label {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,0.85);
+    padding: 3px 8px;
+    border: 1px solid var(--ink-line);
+  }
+  .tech-demo-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 900px) {
+    .tech-dossier {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 28px;
+    }
+    .tech-dossier-header {
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+  }
+
+  /* === Horizontal Pull Quote (Project iii) === */
+  .project-pull-horizontal {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 32px;
+    margin-top: 28px;
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--paper) 0%, rgba(235, 196, 166, 0.18) 100%);
+    box-shadow: 4px 4px 0 var(--ink-line);
+    position: relative;
+    overflow: hidden;
+  }
+  .pull-quote-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+    font-size: 88px;
+    line-height: 0.6;
+    color: var(--peach-deep);
+    opacity: 0.5;
+    padding-top: 16px;
+  }
+  .pull-quote-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .pull-quote-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 19px;
+    line-height: 1.55;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .pull-quote-text em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--peach-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .pull-quote-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-variation-settings: "SOFT" 100;
+    letter-spacing: -0.005em;
+  }
+  .pull-quote-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+  .pull-quote-tags span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 4px 10px;
+    background: var(--cream);
+    border: 1px solid var(--ink-line);
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .project-pull-horizontal {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .pull-quote-tags { align-items: flex-start; }
+  }
+
+  /* === Slot Doc Link (FlowUs etc) === */
+  .slot-doc-link {
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .slot-doc-link::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--lavender-deep);
+    transition: height 0.4s ease;
+  }
+  .slot-doc-link:hover {
+    background: rgba(181, 176, 216, 0.08);
+    transform: translateY(-3px);
+  }
+  .slot-doc-link:hover::before { height: 100%; }
+
+  /* === Hackathon Link Button === */
+  .hackathon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 22px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: all 0.35s ease;
+    border: 1px solid var(--ink);
+  }
+  .hackathon-link:hover {
+    background: var(--lavender-deep);
+    border-color: var(--lavender-deep);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--ink-line);
+  }
+  .hackathon-link .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.14em;
+  }
+  .hackathon-link .arrow {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+  .hackathon-link:hover .arrow { transform: translateX(4px); }
+  
+  /* live-dot 内联使用 */
+  .live-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #2ecc71;
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5); }
+    50% { opacity: 0.6; transform: scale(1.3); box-shadow: 0 0 0 5px rgba(46, 204, 113, 0); }
+  }
+  
+  /* === ALWAYS BUILDING · 持续生长动态卡 === */
+  .always-building {
+    padding: 12vh 7vw;
+    background: linear-gradient(180deg, var(--cream) 0%, rgba(181, 176, 216, 0.15) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--ink-line);
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .ab-bg-orb {
+    position: absolute;
+    top: -140px; left: -100px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(181, 176, 216, 0.4) 0%, transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: ab-float 9s ease-in-out infinite;
+  }
+  .ab-bg-orb-2 {
+    position: absolute;
+    bottom: -100px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(235, 196, 166, 0.35) 0%, transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: ab-float-2 11s ease-in-out infinite;
+  }
+  @keyframes ab-float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(40px, 30px); }
+  }
+  @keyframes ab-float-2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-30px, -40px); }
+  }
+  .always-building > *:not(.ab-bg-orb):not(.ab-bg-orb-2) {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .ab-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 8px 18px;
+    background: var(--paper);
+    border: 1px solid var(--ink-line);
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+  .ab-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.14em;
+  }
+  .ab-live-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #2ecc71;
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+  
+  .ab-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(34px, 4.4vw, 56px);
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 56px;
+    letter-spacing: -0.01em;
+  }
+  .ab-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .ab-emoji {
+    display: inline-block;
+    animation: ab-emoji-wiggle 2.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes ab-emoji-wiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-15deg) scale(1.1); }
+    75% { transform: rotate(15deg) scale(1.1); }
+  }
+  .ab-cn {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    font-variation-settings: "SOFT" 100;
+    letter-spacing: -0.005em;
+  }
+  
+  .ab-status-rotator {
+    max-width: 680px;
+    margin: 0 auto 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .ab-status-line {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 24px;
+    background: var(--paper);
+    border: 1px solid var(--ink-line);
+    border-radius: 100px;
+    box-shadow: 3px 3px 0 var(--ink-line);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: left;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ab-line-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .ab-status-line:nth-child(1) { animation-delay: 0.1s; }
+  .ab-status-line:nth-child(2) { animation-delay: 0.3s; }
+  .ab-status-line:nth-child(3) { animation-delay: 0.5s; }
+  .ab-status-line:nth-child(4) { animation-delay: 0.7s; }
+  
+  @keyframes ab-line-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .ab-status-icon {
+    font-size: 22px;
+    display: inline-block;
+    animation: ab-icon-float 3s ease-in-out infinite;
+  }
+  .ab-status-line:nth-child(odd) .ab-status-icon {
+    animation-delay: 0.5s;
+  }
+  @keyframes ab-icon-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .ab-status-text em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  
+  .ab-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--ink-faded);
+    font-variation-settings: "SOFT" 100;
+  }
+  .ab-typing {
+    margin-right: 4px;
+  }
+  .ab-dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+  .ab-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--lavender-deep);
+    animation: ab-dot-bounce 1.4s ease-in-out infinite;
+  }
+  .ab-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .ab-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes ab-dot-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-6px); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark"><em>He</em> Weijin · Portfolio <span class="cn">何为进 · 作品集</span></div>
+  <a href="index.html" class="nav-back">← Back to universe <span class="cn">· 返回宇宙</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="planet-hero">
+  <div class="hero-orbit hero-orbit-1"></div>
+  <div class="hero-orbit hero-orbit-2"></div>
+  <div class="hero-planet"></div>
+  
+  <div class="breadcrumb">Planet 01 / Five Planets <span class="cn">· 五颗星球 · 第一颗</span></div>
+  
+  <div class="planet-title-row">
+    <div class="planet-roman">01.</div>
+    <div class="planet-title-block">
+      <h1 class="planet-title-en"><span class="star">N</span>OVA</h1>
+      <div class="planet-title-cn">启明</div>
+      <div class="planet-category-row">
+        AI Applications
+        <span class="cn">· AI 应用与产品实验</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="planet-tagline">
+    NOVA 是夜空里第一颗被点亮的星——也是这颗星球的隐喻。
+    在这里，我把抽象的 <em>AI 能力</em>落地为<em> 可被使用的产品</em>：从 Prompt 设计、LLM 工作流的搭建，到一线用户洞察推动产品功能上线，再到本科毕设里的多模态大模型应用。
+  </p>
+
+  <div class="quick-stats">
+    <div class="qstat">
+      <span class="qstat-num">4<em><span class="unit">个</span></em></span>
+      <span class="qstat-label">CORE PROJECTS<span class="cn">核心项目</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">+9<em>%</em></span>
+      <span class="qstat-label">CONVERSION<span class="cn">海外产品转化率</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">+18<em>%</em></span>
+      <span class="qstat-label">RETENTION<span class="cn">用户留存提升</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">+4<em><span class="unit">pp</span></em></span>
+      <span class="qstat-label">D1 RETENTION<span class="cn">次留率提升</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">3<em><span class="unit">张</span></em></span>
+      <span class="qstat-label">CERTIFICATIONS<span class="cn">行业认证</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      01 — Projects
+      <span class="cn">· 核心项目</span>
+    </div>
+    <h2 class="section-title">
+      四件<em>把 AI 落地</em>的事
+      <span class="cn">Four things that brought AI into real products.</span>
+    </h2>
+  </div>
+
+  <div class="projects">
+
+    <!-- Project i. Vaniloom -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">i.</div>
+        <div class="project-tag">
+          PRODUCT · AI ENGINE
+          <span>AI 生文引擎 / 产品迭代</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">Vaniloom AI 生文引擎优化</div>
+        <div class="project-title-en"><em>AutoAgentsai · Prompt &amp; Workflow</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Period</span><span class="value">2025.07 – 2025.09</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">产品经理实习生</span></div>
+          <div class="project-meta-row"><span class="label">Stack</span><span class="value">Dify · LLM · SQL · A/B Testing</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="project-body">
+          <p>负责 Vaniloom 项目 AI 生文引擎<strong>全套提示词初代设计与 4 次迭代</strong>。采用「<em>分层设计</em> + 场景化提示」逻辑——基础规则层 + 场景适配层 + 风格约束层——通过 Prompt Engineering 让引擎生成质量与内测用户满意度显著提高。</p>
+          <p>基于 Dify <strong>搭建 8 条不同功能的故事生成自动化工作流</strong>，优化节点逻辑与资源分配，把"用户输入 → 需求解析 → AI 生成 → 内容校验 → 输出"五个节点串联起来。</p>
+          <p>同时设计并执行 <strong>3 次海外用户 A/B 测试</strong>（变量：文案风格、推送时间），精准触达 Reddit / Discord 用户 1.2w+，最终选定方案使产品转化率提升 9%。</p>
+        </div>
+        <div class="project-results">
+          <div class="pres-item">
+            <div class="pres-num">−35<em>%</em></div>
+            <div class="pres-label">GEN TIME<span class="cn">生成时间</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">+18<em>%</em></div>
+            <div class="pres-label">RETENTION<span class="cn">用户留存</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">+22<em>%</em></div>
+            <div class="pres-label">MAU<span class="cn">月活</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">+9<em>%</em></div>
+            <div class="pres-label">CONVERSION<span class="cn">转化率</span></div>
+          </div>
+        </div>
+        <div class="visual-grid layout-3-stack">
+          <div class="slot slot-image" style="aspect-ratio: 4/5; padding: 0; background: #f0e8d8; border: 1px solid var(--ink); overflow: hidden;">
+            <img src="assets/nova/vani-workflow.png" alt="Vaniloom v1.0 工作流上线 · 朋友圈截图" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <a href="https://flowus.cn/share/751a6c7c-c35e-4c43-982b-7ccc8cd89e77?code=NBVHSX" target="_blank" rel="noopener" class="slot slot-text slot-doc-link" style="text-decoration: none; color: inherit; cursor: pointer;">
+            <div>
+              <div class="slot-text-label">DOC · FLOWUS<span class="cn">完整提示词文档</span></div>
+              <div class="stat-num-big" style="font-size: 32px; line-height: 1.15;">Vaniloom <em>v1.0.3.2</em></div>
+              <div class="stat-cap" style="margin-top: 8px;">完整提示词结构 · 分层设计 + 场景适配</div>
+              <div style="margin-top: 18px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lavender-deep);">
+                OPEN ON FLOWUS · 在 FlowUs 查看 <span style="font-family: 'Fraunces', serif; font-size: 14px;">→</span>
+              </div>
+            </div>
+          </a>
+          <div class="slot slot-quote">
+            <div class="slot-quote-text">
+              「<em>分层设计 + 场景化提示</em>」<br>
+              SYSTEM 层定义规则、USER 层适配场景。
+              <span class="cn">Layered + scene-based prompt design.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project ii. 语鲸 / 产品增长 · 数据分析 -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">ii.</div>
+        <div class="project-tag">
+          GROWTH · DATA ANALYSIS
+          <span>四象限模型 / 渠道投放 / 数据复盘</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">语鲸 APP · 产品增长<br>与数据分析</div>
+        <div class="project-title-en"><em>From a quadrant model to real revenue impact.</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Period</span><span class="value">2025.10 – 至今</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">运营增长实习生（深言科技）</span></div>
+          <div class="project-meta-row"><span class="label">Channel</span><span class="value">小红书 · 聚光平台</span></div>
+          <div class="project-meta-row"><span class="label">Output</span><span class="value">数据模型 · 投放策略 · 素材库</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="project-body">
+          <p>主导小红书渠道投放——搭建「<em>消费 - 激活</em>」<strong>四象限数据分析模型</strong>，以"单位消费金额"与"单位激活用户数"为坐标，把所有素材划分为四种策略对象：核心主力、低效止损、高 ROI 复制、观察测试。</p>
+          <p>对曝光 → 点击 → 激活 → 注册 → 次留<strong>全流程做漏斗式分析</strong>，建立可复用的素材库，规模化复制高转化模板，并独立负责创意提出 → 供应商管理 → 投放优化 → 数据复盘的<em>全链路项目</em>。</p>
+          <p>过程中也从一线运营洞察里挖掘出语鲸 APP 的产品迭代机会，推动新功能进入开发排期，上线后目标用户群<strong>次留率提升约 4 个百分点</strong>。</p>
+        </div>
+        <div class="project-results">
+          <div class="pres-item">
+            <div class="pres-num">−22<em>%</em></div>
+            <div class="pres-label">CAC<span class="cn">获客激活成本</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">15<em>%</em></div>
+            <div class="pres-label">PLATFORM CONTRIB.<span class="cn">平台新增激活贡献</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">1.8<em>x</em></div>
+            <div class="pres-label">EXPOSURE<span class="cn">主力素材曝光扩大（双周）</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">+4<em><span class="unit">pp</span></em></div>
+            <div class="pres-label">D1 RETENTION<span class="cn">次留率提升</span></div>
+          </div>
+        </div>
+        <div class="visual-grid layout-3-stack">
+          <div class="slot slot-image" style="aspect-ratio: 16/10; padding: 0; background: var(--paper); border: 1px solid var(--ink); overflow: hidden;">
+            <img src="assets/nova/data-analysis.png" alt="数据分析策略 · 全流程漏斗与四象限模型" style="width: 100%; height: 100%; object-fit: contain; padding: 16px; background: var(--paper);">
+          </div>
+          <div class="slot slot-text slot-text-stat">
+            <div>
+              <div class="slot-text-label">CORE FRAMEWORK<span class="cn">核心方法</span></div>
+              <div class="stat-num-big">「消费 × <em>激活</em>」</div>
+              <div class="stat-cap">四象限数据分析模型</div>
+            </div>
+          </div>
+          <div class="slot slot-text">
+            <div>
+              <div class="slot-text-label">PIPELINE · 全链路<span class="cn">创意到复盘</span></div>
+              <div class="slot-text-body">
+                创意提出 → 供应商管理 → 投放策略 → A/B 测试 → 实时监控 → <em>数据复盘</em>。<br><br>
+                以低于平均成本 <strong>45%</strong> 的效率贡献了平台 15% 新增激活。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project iii. 草图检索 -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">iii.</div>
+        <div class="project-tag">
+          RESEARCH · AIGC
+          <span>校级重点项目 / AIGC 辅助</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">基于草图的图像检索<br>系统设计</div>
+        <div class="project-title-en"><em>Sketch-based Image Retrieval, with AIGC.</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Period</span><span class="value">2022.10 – 2023.05</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">星火基金核心成员</span></div>
+          <div class="project-meta-row"><span class="label">Stack</span><span class="value">ChatGPT · DeepSeek · 用户调研</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="project-body">
+          <p>独立开展用户调研，设计「<em>需求痛点 + 功能偏好</em>」双维度问卷，<strong>收集有效反馈 200+ 份</strong>。借鉴故事架构的逻辑拆解能力，把用户需求按「高频场景 - 核心痛点 - 潜在期望」三层分类。</p>
+          <p>用 AIGC 工具（ChatGPT / DeepSeek）梳理用户痛点、生成"草图补全提示词"辅助系统识别算法，并设计多模态检索演示脚本（图文 + 短视频）用于项目验收汇报。</p>
+        </div>
+        <div class="project-results">
+          <div class="pres-item">
+            <div class="pres-num">+25<em>%</em></div>
+            <div class="pres-label">ACCURACY<span class="cn">检索准确率</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">200+</div>
+            <div class="pres-label">USER RESEARCH<span class="cn">用户调研样本</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">校级<em>奖</em></div>
+            <div class="pres-label">RECOGNITION<span class="cn">优秀项目</span></div>
+          </div>
+        </div>
+        <div class="project-pull-horizontal">
+          <div class="pull-quote-mark">"</div>
+          <div class="pull-quote-content">
+            <div class="pull-quote-text">把<em>用户的"模糊画"</em>变成系统能听懂的"清晰话"。</div>
+            <div class="pull-quote-en">From fuzzy sketches to machine-readable intent.</div>
+          </div>
+          <div class="pull-quote-tags">
+            <span>用户调研 200+</span>
+            <span>AIGC 工具链</span>
+            <span>多模态检索</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project iv. 毕设MLLM — Tech Dossier 卷宗版式 -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">iv.</div>
+        <div class="project-tag">
+          THESIS · MLLM
+          <span>本科毕业设计</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">基于 MLLM 的<br>工业缺陷检测 Web App</div>
+        <div class="project-title-en"><em>Multimodal LLM for industrial inspection.</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Period</span><span class="value">2026 · 进行中</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">独立完成</span></div>
+          <div class="project-meta-row"><span class="label">Status</span><span class="value">In Progress</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="tech-dossier">
+          <div class="tech-dossier-header">
+            <div class="tech-dossier-header-left">
+              TECHNICAL DOSSIER · FILE №. 04.MLLM
+              <span class="cn">技术档案 · 工业缺陷检测系统</span>
+            </div>
+            <div class="tech-dossier-header-right">In Progress</div>
+          </div>
+
+          <div class="tech-spec">
+            <div class="tech-spec-label">FIELD<span class="cn">领域</span></div>
+            <div class="tech-spec-value">多模态大语言模型<span class="en">Multimodal LLM</span></div>
+
+            <div class="tech-spec-label">APPLICATION<span class="cn">应用</span></div>
+            <div class="tech-spec-value">工业配件缺陷检测<span class="en">Industrial Defect Detection</span></div>
+
+            <div class="tech-spec-label">OUTPUT<span class="cn">产出</span></div>
+            <div class="tech-spec-value">Web App + 论文<span class="en">Web Application + Thesis</span></div>
+
+            <div class="tech-spec-label">STACK<span class="cn">技术栈</span></div>
+            <div class="tech-spec-value">
+              <div class="chips-row">
+                <span class="tech-chip">MLLM</span>
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">CV</span>
+                <span class="tech-chip">Web</span>
+              </div>
+            </div>
+
+            <div class="tech-spec-label">SUPERVISOR<span class="cn">指导老师</span></div>
+            <div class="tech-spec-value">北京工业大学 · 计算机学院</div>
+
+            <div class="tech-spec-label">DEFENSE<span class="cn">答辩</span></div>
+            <div class="tech-spec-value">预计 2027 年春</div>
+          </div>
+
+          <div class="tech-dossier-right">
+            <div class="tech-pull-quote">
+              用 MLLM 让缺陷检测<em>从「判断结果」走向「自然语言解释」</em>。
+              <span class="cn">From a yes/no answer to a description that humans can read.</span>
+            </div>
+
+            <p>
+              传统工业视觉模型给出的是<strong>二元判断</strong>（合格/不合格）或<strong>位置框</strong>，但缺乏可解释性，质检员仍需要二次核对。本毕业设计的核心目标是：让<strong>多模态大语言模型</strong>替代传统视觉模型，使得"缺陷检测"可以由自然语言驱动、由自然语言解释，让工业质检不再依赖大量标注数据。
+            </p>
+
+            <p>
+              项目持续推进中——这部分将随着研发进度，<em>陆续在网站上更新</em>：技术选型对比、Web App 原型 Demo、关键代码片段、最终成果可视化。
+            </p>
+
+            <div class="tech-demo-frame" style="padding: 14px; background: var(--paper); border-radius: 6px; overflow: hidden;">
+              <img src="assets/nova/thesis.png" alt="北京工业大学毕业论文 · 基于MLLM的配件缺陷检测系统设计与实现 · 目录" style="width: 100%; height: auto; display: block; border-radius: 3px;">
+              <div style="margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faded); display: flex; justify-content: space-between;">
+                <span>FIG. THESIS TOC · 论文目录 · 47 PAGES</span>
+                <span>BJUT · 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project v. 抖音 AI 黑客松（最新探索） -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">v.</div>
+        <div class="project-tag">
+          HACKATHON · LATEST
+          <span>2026 · 进行中 / 最新尝试</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">抖音 AI 黑客松<br>互动空间小游戏</div>
+        <div class="project-title-en"><em>Douyin AI Hackathon · Interactive Mini-game</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Period</span><span class="value">2026 · 最新</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">独立参赛 · 创意 + 开发</span></div>
+          <div class="project-meta-row"><span class="label">Output</span><span class="value">交互原型 · 项目文档</span></div>
+          <div class="project-meta-row"><span class="label">Status</span><span class="value"><span class="live-dot"></span> 持续更新中</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="project-body">
+          <p>参加<strong>抖音 AI 黑客松</strong>独立完成的互动空间小游戏项目。把 AI 能力嵌入一个<em>玩起来不像 AI 应用</em>的交互体验里——让玩家在游戏过程中，<strong>自然地体验 LLM 的对话与生成能力</strong>。</p>
+          <p>从创意提案到原型开发的完整流程，全部在<em>限时内</em>独立完成，记录在飞书项目文档里。</p>
+        </div>
+        <div class="project-results">
+          <div class="pres-item">
+            <div class="pres-num">1<em><span class="unit">人</span></em></div>
+            <div class="pres-label">SOLO BUILD<span class="cn">独立参赛</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">∞</div>
+            <div class="pres-label">ITERATIONS<span class="cn">持续迭代</span></div>
+          </div>
+        </div>
+        <div style="margin-top: 24px;">
+          <a href="https://gcnc1ndcwmfy.feishu.cn/wiki/JYHEwsGGIiTbHxkGZP8cq8yxnig?from=from_copylink" target="_blank" rel="noopener" class="hackathon-link">
+            OPEN PROJECT DOC
+            <span class="cn">· 查看完整项目文档（飞书）</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ALWAYS BUILDING — 持续生长动态卡 -->
+<section class="always-building">
+  <div class="ab-bg-orb"></div>
+  <div class="ab-bg-orb-2"></div>
+  
+  <div class="ab-eyebrow">
+    <span class="ab-live-dot"></span>
+    ALWAYS BUILDING <span class="cn">· 持续生长中</span>
+  </div>
+  
+  <h2 class="ab-title">
+    这颗星球，<br>还在<em>继续生长</em> <span class="ab-emoji">✨</span>
+    <span class="ab-cn">This planet is still growing.</span>
+  </h2>
+  
+  <div class="ab-status-rotator">
+    <div class="ab-status-line">
+      <span class="ab-status-icon">⚡</span>
+      <span class="ab-status-text">正在探索新的 <em>AI 产品方向</em></span>
+    </div>
+    <div class="ab-status-line">
+      <span class="ab-status-icon">🚀</span>
+      <span class="ab-status-text">在参加各种 <em>Hackathon / 创新项目</em></span>
+    </div>
+    <div class="ab-status-line">
+      <span class="ab-status-icon">📝</span>
+      <span class="ab-status-text">把每一次尝试，<em>同步分享</em>到个人账号</span>
+    </div>
+    <div class="ab-status-line">
+      <span class="ab-status-icon">🌱</span>
+      <span class="ab-status-text">这个网站也会跟着我，<em>不断更新</em></span>
+    </div>
+  </div>
+  
+  <div class="ab-footer">
+    <span class="ab-typing">she's still typing</span>
+    <span class="ab-dots"><span></span><span></span><span></span></span>
+  </div>
+</section>
+<section class="certs">
+  <div class="certs-header reveal">
+    <div class="certs-eyebrow">02 — Certifications <span class="cn">· 行业认证</span></div>
+    <h2 class="certs-title">三张<em>能证明手感</em>的证书</h2>
+  </div>
+
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-image-wrap">
+        <img src="assets/nova/cert-harmony.jpg" alt="HarmonyOS 应用开发者基础认证">
+      </div>
+      <div class="cert-body">
+        <div class="cert-num">i.</div>
+        <div class="cert-issuer">Huawei Developers · 华为开发者学堂</div>
+        <div class="cert-name">HarmonyOS 应用开发者基础认证</div>
+        <div class="cert-name-en">HarmonyOS App Developer · Foundation</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-image-wrap">
+        <img src="assets/nova/cert-coze.png" alt="AI Agent 能力认证">
+      </div>
+      <div class="cert-body">
+        <div class="cert-num">ii.</div>
+        <div class="cert-issuer">Datawhale × 扣子 Coze</div>
+        <div class="cert-name">AI Agent 能力认证</div>
+        <div class="cert-name-en">Coze Space · AI Agent Builder</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-image-wrap">
+        <img src="assets/nova/cert-prompt.png" alt="Prompt Engineer 认证">
+      </div>
+      <div class="cert-body">
+        <div class="cert-num">iii.</div>
+        <div class="cert-issuer">Datawhale × iFlytek Spark</div>
+        <div class="cert-name">Prompt Engineer 认证</div>
+        <div class="cert-name-en">Spark · Prompt Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIP BANNER -->
+<div class="wip-banner">
+  PREVIEW VERSION <span class="cn">· 预览版 · 项目截图与 PRD 文档将逐步补充上线</span>
+</div>
+
+<!-- NEXT PLANET -->
+<section class="next-planet">
+  <div class="next-orb"></div>
+  <div class="next-label">Next Planet <span class="cn">· 下一颗星球</span></div>
+  <a href="index.html#planets" class="next-link"><em>LUMINA</em></a>
+  <div class="next-cn">流光 · AI 影像与动画短片</div>
+</section>
+
+<footer>
+  <div>© MMXXVI · He Weijin · Planet 01 <span class="cn">何为进 · 启明</span></div>
+  <div>Crafted with care · <span class="cn">用心制作</span></div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

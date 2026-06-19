@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRISM · 折光 — He Weijin Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4EDE2;
+    --paper: #FBF8F2;
+    --ink: #1A1815;
+    --ink-soft: #4A4540;
+    --ink-faded: #8B857C;
+    --ink-line: rgba(26, 24, 21, 0.1);
+    --sage: #94B398;
+    --sage-deep: #6D8E72;
+    --peach: #EBC4A6;
+    --peach-deep: #D29F7C;
+    --lavender: #B5B0D8;
+    --lavender-deep: #8782B8;
+    --chrome: linear-gradient(135deg, #C9CED6 0%, #FAFAFA 25%, #A5ACBA 50%, #FFFFFF 75%, #B5BCC8 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Noto Sans SC', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 100;
+    opacity: 0.55; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    mix-blend-mode: difference;
+    color: #fff;
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400; font-size: 13px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .nav-mark em { font-style: italic; font-weight: 300; }
+  .nav-mark .cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px; letter-spacing: 0.2em;
+    font-weight: 400; text-transform: none;
+    opacity: 0.8;
+  }
+  .nav-back {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff; text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: gap 0.3s ease;
+  }
+  .nav-back:hover { gap: 16px; }
+  .nav-back .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+  }
+
+  /* === Planet Hero === */
+  .planet-hero {
+    min-height: 100vh;
+    padding: 100px 7vw 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .planet-hero-content {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 14px;
+    animation: fadeUp 1s 0.2s both;
+  }
+  .breadcrumb::before {
+    content: ''; width: 48px; height: 1px;
+    background: var(--ink-soft);
+  }
+  .breadcrumb .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.2em;
+  }
+
+  .planet-title-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 48px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .planet-roman {
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-weight: 300;
+    font-size: clamp(60px, 9vw, 144px);
+    line-height: 0.85;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+    animation: fadeUp 1.2s 0.4s both;
+  }
+  .planet-title-block { flex: 1; min-width: 300px; animation: fadeUp 1.2s 0.5s both; }
+  .planet-title-en {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(80px, 14vw, 220px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 80;
+  }
+  .planet-title-en .star {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    background: var(--chrome);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .planet-title-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(28px, 3vw, 48px);
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 16px;
+    letter-spacing: 0.1em;
+    animation: fadeUp 1.2s 0.7s both;
+  }
+  .planet-category-row {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 1.2s 0.8s both;
+  }
+  .planet-category-row .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+  }
+
+  .planet-tagline {
+    margin-top: 64px;
+    max-width: 640px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.8;
+    color: var(--ink-soft);
+    animation: fadeUp 1.2s 0.9s both;
+  }
+  .planet-tagline em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  /* 浮动星球+轨道 */
+  .hero-planet {
+    position: absolute;
+    top: 50%; right: 5%;
+    transform: translateY(-50%);
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: 
+      radial-gradient(circle at 30% 25%, #D5D1ED 0%, var(--lavender) 35%, var(--lavender-deep) 75%, #5F5A99 100%);
+    box-shadow: 
+      0 80px 160px -40px rgba(135, 130, 184, 0.55),
+      inset -20px -30px 60px rgba(0, 0, 0, 0.18);
+    animation: rotate 80s linear infinite, fadeIn 2s 0.6s both;
+    z-index: -1;
+    opacity: 0.85;
+  }
+  .hero-orbit {
+    position: absolute;
+    top: 50%; right: 5%;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed rgba(135, 130, 184, 0.25);
+    z-index: -1;
+    animation: fadeIn 2.5s 1s both;
+  }
+  .hero-orbit-1 {
+    width: 540px; height: 540px;
+    margin-right: 210px;
+  }
+  .hero-orbit-2 {
+    width: 680px; height: 680px;
+    margin-right: 210px;
+    border-color: rgba(135, 130, 184, 0.12);
+  }
+
+  /* 快速数据条 */
+  .quick-stats {
+    position: relative;
+    margin-top: 96px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--ink-line);
+    padding-top: 28px;
+    animation: fadeUp 1.2s 1.1s both;
+    flex-wrap: wrap;
+    gap: 32px 24px;
+  }
+  .qstat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .qstat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 30px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .qstat-num em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .qstat-num .unit {
+    font-size: 0.55em;
+    margin-left: 2px;
+  }
+  .qstat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .qstat-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+    color: var(--ink-soft);
+    font-size: 10px;
+  }
+
+  /* === Section通用 === */
+  .section {
+    padding: 14vh 7vw;
+    position: relative;
+  }
+  .section-header {
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .section-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.2em;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 80px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-align: right;
+    max-width: 60%;
+    font-variation-settings: "SOFT" 80;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .section-title .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.42em;
+    margin-top: 12px;
+    color: var(--ink-soft);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  /* === Projects List === */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+  }
+  
+  .project {
+    display: grid;
+    grid-template-columns: 180px 1fr 1.4fr;
+    gap: 48px;
+    padding: 48px 0;
+    border-top: 1px solid var(--ink-line);
+    align-items: start;
+  }
+  .project:hover .project-num {
+    color: var(--lavender-deep);
+    transform: translateX(8px);
+  }
+  
+  .project-num-block {
+    position: sticky;
+    top: 100px;
+  }
+  .project-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 56px;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+    line-height: 1;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    letter-spacing: -0.02em;
+  }
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 18px;
+    line-height: 1.6;
+  }
+  .project-tag span {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .project-left {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .project-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(24px, 2.4vw, 32px);
+    line-height: 1.25;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .project-title-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 20px);
+    color: var(--ink-soft);
+    font-variation-settings: "SOFT" 100;
+    line-height: 1.3;
+  }
+  .project-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .project-meta-row {
+    display: flex;
+    gap: 8px;
+  }
+  .project-meta-row .label {
+    color: var(--ink-faded);
+    min-width: 56px;
+  }
+  .project-meta-row .value {
+    color: var(--ink-soft);
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: none;
+  }
+
+  .project-right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .project-body p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .project-body strong {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .project-body em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .project-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--ink-line);
+    border-radius: 14px;
+  }
+  .pres-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .pres-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .pres-num em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .pres-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 4px;
+  }
+  .pres-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  /* 视觉占位（旧版单方框，保留作为后备） */
+  .project-visual {
+    aspect-ratio: 16/9;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #EFE7D8 0%, #DBD0BD 100%);
+    border: 1px solid var(--ink-line);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(181, 176, 216, 0.4) 0%, transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(148, 179, 152, 0.3) 0%, transparent 55%);
+  }
+  .project-visual-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .project-visual-text .icon {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+    margin-bottom: 6px;
+  }
+  .project-visual-text .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .project-visual-text .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    margin-top: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ============================================
+     视觉拼贴网格系统 — 每个方框可独立放图片/文字
+     用于填充 P2 等大空白区域，灵感来自 Image 3
+  ============================================ */
+  .visual-grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  /* 布局变体 */
+  .visual-grid.layout-3-stack {
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .visual-grid.layout-3-stack .slot:nth-child(1) {
+    grid-row: 1 / 3;
+  }
+  .visual-grid.layout-2-equal {
+    grid-template-columns: 1fr 1fr;
+  }
+  .visual-grid.layout-1-wide {
+    grid-template-columns: 1fr;
+  }
+
+  /* 单个 slot — 可装图片或文字 */
+  .slot {
+    border-radius: 14px;
+    border: 1px solid var(--ink-line);
+    overflow: hidden;
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+  }
+  .slot.slot-tall { aspect-ratio: 3/4; }
+  .slot.slot-wide { aspect-ratio: 16/9; }
+  .slot.slot-square { aspect-ratio: 1/1; }
+
+  /* 图片 slot — 用渐变占位（未来替换为真实图片） */
+  .slot-image {
+    background: linear-gradient(135deg, #EFE7D8 0%, #DBD0BD 100%);
+    position: relative;
+  }
+  .slot-image::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--slot-bg, 
+      radial-gradient(circle at 30% 30%, rgba(181, 176, 216, 0.4) 0%, transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(148, 179, 152, 0.3) 0%, transparent 55%));
+  }
+  .slot-image .slot-label {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    z-index: 2;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: rgba(251, 248, 242, 0.92);
+    padding: 4px 9px;
+    border: 1px solid var(--ink-line);
+    border-radius: 3px;
+  }
+  .slot-image .slot-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    margin-left: 4px;
+  }
+  /* 不同色调的图片 slot */
+  .slot-tone-lavender { 
+    --slot-bg: radial-gradient(circle at 30% 30%, rgba(181, 176, 216, 0.55) 0%, transparent 60%),
+               linear-gradient(135deg, #EDE6F4 0%, #B5AED8 100%);
+  }
+  .slot-tone-sage {
+    --slot-bg: radial-gradient(circle at 40% 35%, rgba(151, 175, 142, 0.5) 0%, transparent 65%),
+               linear-gradient(135deg, #E6EFE0 0%, #97AF8E 100%);
+  }
+  .slot-tone-peach {
+    --slot-bg: radial-gradient(circle at 70% 30%, rgba(229, 184, 154, 0.55) 0%, transparent 60%),
+               linear-gradient(135deg, #FBF1E4 0%, #E5B89A 80%);
+  }
+  .slot-tone-paper {
+    --slot-bg: repeating-linear-gradient(0deg, transparent 0px, transparent 10px, rgba(21,19,15,0.04) 10px, rgba(21,19,15,0.04) 11px),
+               linear-gradient(135deg, #FBF7EE 0%, #E8DECC 100%);
+  }
+  .slot-tone-dark {
+    --slot-bg: linear-gradient(135deg, #1A1815 0%, #3B3848 100%);
+  }
+  .slot-tone-dark .slot-label {
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  /* 文字 slot — 灵活装文字内容 */
+  .slot-text {
+    background: var(--paper);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .slot-text-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 10px;
+  }
+  .slot-text-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-size: 10px;
+  }
+  .slot-text-body {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+  .slot-text-body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .slot-text-body em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  /* 大字数据型文字slot */
+  .slot-text.slot-text-stat {
+    align-items: flex-start;
+    justify-content: center;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .slot-text-stat .slot-text-label {
+    color: rgba(229, 184, 154, 0.75);
+  }
+  .slot-text-stat .stat-num-big {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 80;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .slot-text-stat .stat-num-big em {
+    font-style: italic;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+  }
+  .slot-text-stat .stat-cap {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  /* Pull quote 引述 slot — 杂志大引号 */
+  .slot-quote {
+    background: var(--paper);
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slot-quote::before {
+    content: '"';
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+    font-size: 56px;
+    line-height: 0.4;
+    color: var(--peach-deep);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .slot-quote-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 1.45;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .slot-quote-text em {
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .slot-quote-text .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-style: normal;
+    font-size: 0.7em;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .visual-grid.layout-3-stack,
+    .visual-grid.layout-2-equal {
+      grid-template-columns: 1fr;
+    }
+    .visual-grid.layout-3-stack .slot:nth-child(1) {
+      grid-row: auto;
+    }
+  }
+
+  /* === 证书展示 === */
+  .certs {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14vh 7vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .certs::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(181, 176, 216, 0.2) 0%, transparent 65%);
+    filter: blur(60px);
+  }
+
+  .certs-header {
+    margin-bottom: 80px;
+    position: relative; z-index: 1;
+  }
+  .certs-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 20px;
+    display: flex; gap: 8px;
+  }
+  .certs-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .certs-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 70%;
+    font-variation-settings: "SOFT" 80;
+  }
+  .certs-title em {
+    font-style: italic;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative; z-index: 1;
+  }
+  .cert-card {
+    padding: 0;
+    border: 1px solid rgba(244, 237, 226, 0.2);
+    border-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    background: rgba(244, 237, 226, 0.03);
+    display: flex;
+    flex-direction: column;
+  }
+  .cert-card::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--chrome);
+    opacity: 0.15;
+    transition: all 0.5s ease;
+    z-index: 2;
+  }
+  .cert-card:hover {
+    border-color: rgba(244, 237, 226, 0.5);
+    transform: translateY(-5px);
+    background: rgba(244, 237, 226, 0.06);
+  }
+  .cert-card:hover::before {
+    opacity: 0.3;
+    transform: scale(1.2);
+  }
+  .cert-image-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(244, 237, 226, 0.15);
+  }
+  .cert-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: block;
+  }
+  .cert-card:hover .cert-image-wrap img {
+    transform: scale(1.04);
+  }
+  .cert-body {
+    padding: 24px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cert-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+    margin-bottom: 4px;
+  }
+  .cert-issuer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .cert-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .cert-name-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    opacity: 0.7;
+    font-variation-settings: "SOFT" 100;
+  }
+
+  /* === Next Planet === */
+  .next-planet {
+    padding: 14vh 7vw;
+    background: var(--paper);
+    border-top: 1px solid var(--ink-line);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .next-orb {
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #F2D5C0 0%, var(--peach) 50%, var(--peach-deep) 100%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.18;
+    filter: blur(40px);
+  }
+  .next-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; gap: 8px;
+  }
+  .next-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .next-link {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 10vw, 144px);
+    line-height: 0.95;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.04em;
+    font-variation-settings: "SOFT" 80;
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative; z-index: 1;
+  }
+  .next-link em {
+    font-style: italic;
+    color: var(--peach-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .next-link:hover {
+    transform: translateX(20px);
+  }
+  .next-link::after {
+    content: '→';
+    margin-left: 24px;
+    color: var(--peach-deep);
+  }
+  .next-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-top: 18px;
+    letter-spacing: 0.12em;
+    position: relative; z-index: 1;
+    font-weight: 500;
+  }
+
+  footer {
+    padding: 36px 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--ink-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+  }
+
+  /* WIP banner */
+  .wip-banner {
+    background: linear-gradient(90deg, var(--peach) 0%, var(--lavender) 100%);
+    color: var(--ink);
+    padding: 14px 7vw;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    margin-top: 80px;
+  }
+  .wip-banner .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.15em;
+    margin-left: 8px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-50%) scale(0.6); }
+    to { opacity: 0.85; transform: translateY(-50%) scale(1); }
+  }
+  @keyframes rotate {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .planet-title-row { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .hero-planet { width: 240px; height: 240px; right: -50px; opacity: 0.4; }
+    .hero-orbit-1, .hero-orbit-2 { display: none; }
+    .quick-stats { position: relative; bottom: auto; left: 0; right: 0; margin-top: 60px; gap: 24px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .section-title { text-align: left; max-width: 100%; }
+    .project { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
+    .project-num-block { position: relative; top: auto; }
+    .certs-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================
+     TECH DOSSIER — 图 4 卷宗版式（仅用于 MLLM 项目）
+  ============================================ */
+  .tech-dossier {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 6px 6px 0 var(--ink-line);
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 48px;
+    margin-top: 8px;
+  }
+  .tech-dossier-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 12px;
+  }
+  .tech-dossier-header-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .tech-dossier-header-left .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.14em;
+    display: block;
+    margin-top: 4px;
+    color: var(--ink-soft);
+  }
+  .tech-dossier-header-right {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: 16px;
+    color: var(--peach-deep);
+    padding: 4px 12px;
+    border: 1px solid var(--peach-deep);
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+  }
+  .tech-spec {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px 18px;
+    align-items: baseline;
+  }
+  .tech-spec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    padding-top: 2px;
+  }
+  .tech-spec-label .cn {
+    display: block;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-size: 10px;
+  }
+  .tech-spec-value {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.55;
+  }
+  .tech-spec-value .en {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    color: var(--ink-soft);
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .tech-spec-value .chips-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 6px;
+  }
+  .tech-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    padding: 3px 10px;
+    border: 1px solid var(--ink-line);
+    border-radius: 100px;
+    text-transform: uppercase;
+    background: var(--paper);
+  }
+  .tech-dossier-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .tech-pull-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    padding-left: 24px;
+    border-left: 3px solid var(--peach-deep);
+    margin: 0;
+  }
+  .tech-pull-quote::before {
+    content: '"';
+    display: block;
+    font-size: 1.2em;
+    color: var(--peach-deep);
+    line-height: 0.4;
+    margin-bottom: 12px;
+  }
+  .tech-pull-quote em {
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .tech-pull-quote .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-style: normal;
+    font-size: 0.62em;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .tech-dossier-right p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+  .tech-dossier-right p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .tech-dossier-right p em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .tech-demo-frame {
+    aspect-ratio: 16/7;
+    border: 1px solid var(--ink);
+    background: linear-gradient(135deg, #B8BFC9 0%, #F4F4F0 25%, #94A0B0 50%, #FFFFFF 75%, #A0AAB8 100%);
+    border-radius: 4px;
+    position: relative;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .tech-demo-label {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,0.85);
+    padding: 3px 8px;
+    border: 1px solid var(--ink-line);
+  }
+  .tech-demo-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 900px) {
+    .tech-dossier {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 28px;
+    }
+    .tech-dossier-header {
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+  }
+  /* ============================================
+     PRISM · 折光 专用组件
+  ============================================ */
+  
+  .gallery-block {
+    margin-top: 32px;
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    background: var(--paper);
+    box-shadow: 6px 6px 0 var(--ink-line);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .gallery-block:hover {
+    transform: translate(-2px, -4px);
+    box-shadow: 10px 10px 0 var(--ink-line);
+  }
+  .gallery-meta-bar {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--ink-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 18px;
+    background: linear-gradient(180deg, var(--paper) 0%, rgba(181, 176, 216, 0.06) 100%);
+  }
+  .gallery-meta-left {
+    flex: 1; min-width: 280px;
+  }
+  .gallery-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 30px;
+    color: var(--lavender-deep);
+    line-height: 1;
+    font-variation-settings: "SOFT" 100;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .gallery-title-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .gallery-title-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: 16px;
+    color: var(--lavender-deep);
+    letter-spacing: -0.005em;
+  }
+  .gallery-tag-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .gallery-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 5px 12px;
+    border: 1px solid var(--ink-line);
+    border-radius: 100px;
+    background: var(--cream);
+  }
+  .gallery-tag .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+    margin-left: 2px;
+  }
+  
+  .gallery-canvas {
+    padding: 28px 32px 32px;
+    background: var(--cream);
+    position: relative;
+  }
+  .gallery-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(135, 130, 184, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(135, 130, 184, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+  .gallery-image-wrap {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: 3px 3px 0 rgba(26, 24, 21, 0.08);
+    border: 1px solid var(--ink-line);
+  }
+  .gallery-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .gallery-image-wrap:hover img {
+    transform: scale(1.012);
+  }
+  
+  .gallery-footer {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--ink-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    position: relative;
+    z-index: 1;
+  }
+  .gallery-footer .meta-themes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .gallery-footer .meta-themes span {
+    padding: 3px 10px;
+    background: rgba(181, 176, 216, 0.18);
+    border-radius: 100px;
+  }
+  
+  /* PRISM 简短引言 */
+  .prism-intro {
+    padding: 12vh 7vw 4vh;
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .prism-intro-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+  .prism-intro-text em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .prism-intro-text strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  
+  @media (max-width: 900px) {
+    .gallery-meta-bar { padding: 20px; }
+    .gallery-canvas { padding: 20px; }
+    .gallery-tag-row { align-items: flex-start; }
+  }
+  
+  /* === Video Covers Masonry · 交错排版 === */
+  .covers-masonry {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .cover-col-right {
+    padding-top: 32px; /* 右列下移一点制造交错感 */
+  }
+  .cover-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid var(--ink-line);
+    background: var(--paper);
+    box-shadow: 3px 3px 0 rgba(26, 24, 21, 0.1);
+    transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+  }
+  .cover-card:hover {
+    transform: translate(-3px, -4px) rotate(-0.4deg);
+    box-shadow: 7px 7px 0 rgba(26, 24, 21, 0.18);
+    z-index: 2;
+  }
+  .cover-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .cover-card:hover img {
+    transform: scale(1.03);
+  }
+  .cover-overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 14px 18px 12px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+  }
+  .cover-card:hover .cover-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .cover-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #fff;
+    flex: 1;
+  }
+  .cover-views {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 760px) {
+    .covers-masonry { grid-template-columns: 1fr; }
+    .cover-col-right { padding-top: 0; }
+  }
+  
+  /* === VIRAL POST · 爆款单帖 === */
+  .viral-block {
+    margin-top: 32px;
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    background: var(--paper);
+    box-shadow: 6px 6px 0 var(--ink-line);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .viral-block:hover {
+    transform: translate(-2px, -4px);
+    box-shadow: 10px 10px 0 var(--ink-line);
+  }
+  .viral-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--lavender-deep) 0%, var(--peach-deep) 100%);
+    z-index: 2;
+  }
+
+  .viral-meta-strip {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--ink-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+    flex-wrap: wrap;
+    background: linear-gradient(180deg, var(--paper) 0%, rgba(181, 176, 216, 0.08) 100%);
+  }
+  .viral-title-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .viral-title-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100;
+    font-size: 16px;
+    color: var(--lavender-deep);
+  }
+  .viral-meta-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  .viral-body {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 36px;
+    padding: 36px;
+    background: var(--cream);
+    align-items: start;
+  }
+
+  .viral-image-wrap {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--ink-line);
+    box-shadow: 4px 4px 0 rgba(26, 24, 21, 0.1);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .viral-image-wrap:hover {
+    transform: rotate(-0.3deg) translateY(-2px);
+  }
+  .viral-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .viral-image-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: rgba(244, 237, 226, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #FF2741;
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+
+  .viral-stats-col {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 20px;
+  }
+
+  .viral-quote {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    position: relative;
+    padding-left: 22px;
+    border-left: 3px solid var(--lavender-deep);
+  }
+  .viral-quote em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .viral-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .viral-stat {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    padding: 22px 16px 18px;
+    text-align: center;
+    box-shadow: 3px 3px 0 var(--ink-line);
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .viral-stat:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 5px 5px 0 var(--ink-line);
+  }
+  .viral-stat-icon {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .viral-stat-likes .viral-stat-icon { color: #FF2741; }
+  .viral-stat-saves .viral-stat-icon { color: #E8B860; }
+  .viral-stat-comments .viral-stat-icon { color: var(--lavender-deep); }
+  .viral-stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .viral-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .viral-stat-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+  }
+
+  .viral-save-ratio {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(181, 176, 216, 0.18) 0%, rgba(235, 196, 166, 0.18) 100%);
+    border: 1px dashed var(--ink-line);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ratio-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .ratio-num em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+    font-size: 1.15em;
+  }
+  .ratio-cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .viral-block .gallery-footer {
+    padding: 16px 32px;
+    border-top: 1px dashed var(--ink-line);
+  }
+
+  @media (max-width: 900px) {
+    .viral-body {
+      grid-template-columns: 1fr;
+      padding: 24px;
+      gap: 24px;
+    }
+    .viral-meta-tags { align-items: flex-start; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark"><em>He</em> Weijin · Portfolio <span class="cn">何为进 · 作品集</span></div>
+  <a href="index.html" class="nav-back">← Back to universe <span class="cn">· 返回宇宙</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="planet-hero">
+  <div class="hero-orbit hero-orbit-1"></div>
+  <div class="hero-orbit hero-orbit-2"></div>
+  <div class="hero-planet"></div>
+  
+  <div class="breadcrumb">Planet 05 / Five Planets <span class="cn">· 五颗星球 · 第五颗</span></div>
+  
+  <div class="planet-title-row">
+    <div class="planet-roman">05.</div>
+    <div class="planet-title-block">
+      <h1 class="planet-title-en"><span class="star">P</span>RISM</h1>
+      <div class="planet-title-cn">折光</div>
+      <div class="planet-category-row">
+        Visual Publishing
+        <span class="cn">· 视觉排版与物料设计</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="planet-tagline">
+    PRISM 是<em>把一束光分成七色</em>——这颗星球收录每一份视觉排版与物料设计。
+    从北工大官微的<em>节日 / 科普 / 校园题材公众号</em>排版，到小红书图文系列（信息极简 · 语鲸 APP · SQ3R 阅读法）——同一份信息，在不同的画面里折出不同的光。
+  </p>
+
+  <div class="quick-stats">
+    <div class="qstat">
+      <span class="qstat-num">3<em><span class="unit">类</span></em></span>
+      <span class="qstat-label">VISUAL FORMATS<span class="cn">视觉类型</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">10<em>+</em></span>
+      <span class="qstat-label">WECHAT LAYOUTS<span class="cn">公众号长图排版</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">20<em>+</em></span>
+      <span class="qstat-label">XHS POSTS<span class="cn">小红书图文系列</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">15<em>+</em></span>
+      <span class="qstat-label">VIDEO COVERS<span class="cn">视频封面设计</span></span>
+    </div>
+    <div class="qstat">
+      <span class="qstat-num">∞</span>
+      <span class="qstat-label">VARIATIONS<span class="cn">仍在生长</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- PRISM 引言 -->
+<section class="prism-intro reveal">
+  <p class="prism-intro-text">
+    一份信息可以被压缩成一张<em>长图</em>，也可以被铺开成<em>九宫格图文</em>。
+    PRISM 收录我在北工大官微、小红书运营、个人项目里做过的<strong>视觉排版</strong>——同样的内容，<em>在不同的画面里折出不同的光</em>。
+  </p>
+</section>
+
+<!-- ============================================
+     GALLERY 01 — 公众号长图排版
+============================================ -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      01 — WeChat Layouts
+      <span class="cn">· 公众号长图排版</span>
+    </div>
+    <h2 class="section-title">
+      节日、节气、科普——<br>把<em>校园叙事</em>做成一张长图
+      <span class="cn">A campus voice rendered as a long-form layout.</span>
+    </h2>
+  </div>
+
+  <div class="gallery-block reveal">
+    <div class="gallery-meta-bar">
+      <div class="gallery-meta-left">
+        <div class="gallery-num">i.</div>
+        <div class="gallery-title-cn">北工大官微 · 公众号长图排版</div>
+        <div class="gallery-title-en"><em>BJUT WeChat — Long-form Editorial Layouts</em></div>
+      </div>
+      <div class="gallery-tag-row">
+        <div class="gallery-tag">CHANNEL <span class="cn">渠道 / 公众号</span></div>
+        <div class="gallery-tag">ROLE <span class="cn">视觉排版主笔</span></div>
+      </div>
+    </div>
+    <div class="gallery-canvas">
+      <div class="gallery-image-wrap">
+        <img src="assets/prism/wechat-layouts.png" alt="北工大官微 · 公众号长图排版作品集">
+      </div>
+      <div class="gallery-footer">
+        <span>FIG. 01 · BJUT WECHAT · 2023–2024</span>
+        <div class="meta-themes">
+          <span>冬至 · 北饺子</span>
+          <span>520 · 表达</span>
+          <span>甲流防护</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GALLERY 02 — 小红书图文 · 信息极简 / 语鲸 series
+============================================ -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      02 — Xiaohongshu Posts
+      <span class="cn">· 小红书图文系列</span>
+    </div>
+    <h2 class="section-title">
+      把一个<em>产品</em>，<br>讲成一组<em>能被收藏</em>的图文
+      <span class="cn">A product told as a save-worthy carousel.</span>
+    </h2>
+  </div>
+
+  <div class="gallery-block reveal">
+    <div class="gallery-meta-bar">
+      <div class="gallery-meta-left">
+        <div class="gallery-num">ii.</div>
+        <div class="gallery-title-cn">信息极简 · 语鲸 APP 推广系列</div>
+        <div class="gallery-title-en"><em>"Minimal Information" — Whale App Series</em></div>
+      </div>
+      <div class="gallery-tag-row">
+        <div class="gallery-tag">CHANNEL <span class="cn">渠道 / 小红书</span></div>
+        <div class="gallery-tag">ROLE <span class="cn">视觉策划 + 排版</span></div>
+      </div>
+    </div>
+    <div class="gallery-canvas">
+      <div class="gallery-image-wrap" style="margin-bottom: 16px;">
+        <img src="assets/prism/xhs-series-1.png" alt="小红书图文 · 信息极简 + 语鲸APP 系列（一）">
+      </div>
+      <div class="gallery-image-wrap">
+        <img src="assets/prism/xhs-series-2.png" alt="小红书图文 · 信息极简 + 语鲸APP 系列（二）">
+      </div>
+      <div class="gallery-footer">
+        <span>FIG. 02 · XHS CAROUSELS · 2025</span>
+        <div class="meta-themes">
+          <span>信息极简</span>
+          <span>ALL IN ONE</span>
+          <span>个人专属日报</span>
+          <span>语鲸 APP 推广</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GALLERY 03 — 视频封面 · 影视/动漫/AI 影像（交错排版）
+============================================ -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      03 — Video Covers
+      <span class="cn">· 视频封面设计</span>
+    </div>
+    <h2 class="section-title">
+      一帧封面，<br>是整支视频的<em>第一个钩子</em>
+      <span class="cn">A thumbnail is a film's first hook.</span>
+    </h2>
+  </div>
+
+  <div class="gallery-block reveal">
+    <div class="gallery-meta-bar">
+      <div class="gallery-meta-left">
+        <div class="gallery-num">iii.</div>
+        <div class="gallery-title-cn">「芝士围巾」频道 · 视频封面合集</div>
+        <div class="gallery-title-en"><em>Cheese Scarf Channel — Thumbnail Designs</em></div>
+      </div>
+      <div class="gallery-tag-row">
+        <div class="gallery-tag">CHANNEL <span class="cn">B 站 / 小红书 / 抖音</span></div>
+        <div class="gallery-tag">ROLE <span class="cn">封面设计 / 主笔</span></div>
+      </div>
+    </div>
+    <div class="gallery-canvas">
+      <!-- 交错铺开的视频封面网格 -->
+      <div class="covers-masonry">
+        <!-- 左列：宽横版主封面 -->
+        <div class="cover-col cover-col-left">
+          <div class="cover-card cover-wide reveal">
+            <img src="assets/prism/covers-luye-ruby.jpg" alt="鹿野师姐 + Ruby 解析 · 双联封面">
+            <div class="cover-overlay">
+              <div class="cover-label">鹿野师姐 · 人物深度解析</div>
+              <div class="cover-views">74,312 浏览</div>
+            </div>
+          </div>
+          <div class="cover-card cover-wide reveal">
+            <img src="assets/prism/covers-museum-leader.jpg" alt="人类博物馆 + 人类领袖 · 双联封面">
+            <div class="cover-overlay">
+              <div class="cover-label">人类博物馆 · AIGC 动画短片</div>
+              <div class="cover-views">AIGC · 2126</div>
+            </div>
+          </div>
+        </div>
+        <!-- 右列：竖版三联封面 -->
+        <div class="cover-col cover-col-right">
+          <div class="cover-card cover-tall reveal">
+            <img src="assets/prism/covers-vertical.jpg" alt="罗小黑 · Taylor · 人类领袖 三联封面">
+            <div class="cover-overlay">
+              <div class="cover-label">影视 / 群像 / 解析 三联</div>
+              <div class="cover-views">B 站合集</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-footer">
+        <span>FIG. 03 · VIDEO THUMBNAILS · 2024–2025</span>
+        <div class="meta-themes">
+          <span>鹿野师姐</span>
+          <span>Ruby 解析</span>
+          <span>AIGC · 2126</span>
+          <span>人类领袖</span>
+          <span>Taylor 群像</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GALLERY 04 — 爆款单帖 · 宝藏 UP 主推荐
+============================================ -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      04 — Viral Post
+      <span class="cn">· 爆款单帖</span>
+    </div>
+    <h2 class="section-title">
+      一张<em>会被反复收藏</em>的图<br>能跑多远？
+      <span class="cn">How far can a single carousel travel?</span>
+    </h2>
+  </div>
+
+  <div class="viral-block reveal">
+    <div class="viral-meta-strip">
+      <div>
+        <div class="gallery-num" style="margin-bottom: 8px;">iv.</div>
+        <div class="viral-title-cn">「宝藏女 UP 主推荐」</div>
+        <div class="viral-title-en"><em>Featured Women Creators on Bilibili</em></div>
+      </div>
+      <div class="viral-meta-tags">
+        <div class="gallery-tag">CHANNEL <span class="cn">小红书</span></div>
+        <div class="gallery-tag" style="background: var(--lavender); color: var(--ink); border-color: var(--ink);">⭐ VIRAL HIT <span class="cn">· 爆款</span></div>
+      </div>
+    </div>
+
+    <div class="viral-body">
+      <div class="viral-image-wrap">
+        <img src="assets/prism/viral-post.jpg" alt="宝藏女 UP 主推荐 · 小红书爆款图文">
+        <div class="viral-image-badge">
+          <span class="badge-dot"></span>
+          XHS · 自制
+        </div>
+      </div>
+
+      <div class="viral-stats-col">
+        <div class="viral-quote">
+          一份<em>宝藏 UP 主推荐合集</em>——<br>
+          手绘风排版 + 真诚私货，<br>
+          被反复保存的<em>那一种内容</em>。
+        </div>
+        
+        <div class="viral-stats-grid">
+          <div class="viral-stat viral-stat-likes">
+            <div class="viral-stat-icon">♥</div>
+            <div class="viral-stat-num">3,294</div>
+            <div class="viral-stat-label">LIKES <span class="cn">· 点赞</span></div>
+          </div>
+          <div class="viral-stat viral-stat-saves">
+            <div class="viral-stat-icon">☆</div>
+            <div class="viral-stat-num">2,337</div>
+            <div class="viral-stat-label">SAVES <span class="cn">· 收藏</span></div>
+          </div>
+          <div class="viral-stat viral-stat-comments">
+            <div class="viral-stat-icon">✎</div>
+            <div class="viral-stat-num">121</div>
+            <div class="viral-stat-label">COMMENTS <span class="cn">· 评论</span></div>
+          </div>
+        </div>
+        
+        <div class="viral-save-ratio">
+          <span class="ratio-num">收藏 / 赞 ≈ <em>71%</em></span>
+          <span class="ratio-cn">极高的「收藏-点赞比」——内容值得被反复回看的硬指标</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-footer">
+      <span>FIG. 04 · VIRAL XHS POST · 2024</span>
+      <div class="meta-themes">
+        <span>宝藏女 UP 主合集</span>
+        <span>手绘风排版</span>
+        <span>真诚私货</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEXT PLANET -->
+<section class="next-planet">
+  <div class="next-orb"></div>
+  <div class="next-label">Next Planet <span class="cn">· 下一颗星球</span></div>
+  <a href="planet-01.html" class="next-link"><em>NOVA</em></a>
+  <div class="next-cn">启明 · AI 应用与产品实验（回到第一颗）</div>
+</section>
+
+<footer>
+  <div>© MMXXVI · He Weijin · Planet 05 <span class="cn">何为进 · 折光</span></div>
+  <div>Crafted with care · <span class="cn">用心制作</span></div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

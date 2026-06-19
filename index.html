@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>何为进 · 作品集 / A Soft Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4EDE2;
+    --cream-deep: #EBE2D3;
+    --paper: #FBF8F2;
+    --ink: #1A1815;
+    --ink-soft: #4A4540;
+    --ink-faded: #8B857C;
+    --ink-line: rgba(26, 24, 21, 0.1);
+    --sage: #94B398;
+    --sage-deep: #6D8E72;
+    --peach: #EBC4A6;       /* 暖粉橘 */
+    --peach-deep: #D29F7C;
+    --blush: #E8C5B5;
+    --lavender: #B5B0D8;
+    --lavender-deep: #8782B8;
+    --sun: #E8B860;
+    --chrome: linear-gradient(135deg, #C9CED6 0%, #FAFAFA 25%, #A5ACBA 50%, #FFFFFF 75%, #B5BCC8 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Noto Sans SC', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  /* 纸张颗粒感 */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 100;
+    opacity: 0.55; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* === Navigation === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+    color: #fff;
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400; font-size: 13px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .nav-mark em { font-style: italic; font-weight: 300; }
+  .nav-mark .cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-transform: none;
+    opacity: 0.8;
+  }
+  .nav-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    opacity: 0.85;
+    display: flex;
+    gap: 24px;
+  }
+  .nav-meta span::before {
+    content: '●';
+    margin-right: 6px;
+    font-size: 7px;
+    opacity: 0.5;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 7vw;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    display: flex; align-items: center; gap: 16px;
+    animation: fadeUp 1.2s 0.3s both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: var(--ink-soft);
+  }
+  .hero-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.25em;
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 12vw, 200px);
+    line-height: 0.92;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 80, "opsz" 144;
+  }
+  .hero-title .line1 { display: block; animation: fadeUp 1.4s 0.5s both; }
+  .hero-title .line2 { 
+    display: block; 
+    padding-left: 14vw;
+    animation: fadeUp 1.4s 0.75s both;
+  }
+  .hero-title .line3 { 
+    display: block; 
+    padding-left: 4vw;
+    animation: fadeUp 1.4s 1s both;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+  .hero-title .amp {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    background: var(--chrome);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 400;
+  }
+
+  .hero-subtitle {
+    margin-top: 56px;
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+    flex-wrap: wrap;
+    animation: fadeUp 1.4s 1.25s both;
+  }
+  .hero-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  .hero-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  /* 浮动球体 */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .orb-1 {
+    width: 360px; height: 360px;
+    background: radial-gradient(circle at 35% 30%, #C5BFE3 0%, var(--lavender) 40%, var(--lavender-deep) 80%);
+    top: 6%; right: 5%;
+    animation: float1 14s ease-in-out infinite, fadeIn 2s 0.2s both;
+    box-shadow: 0 60px 120px -30px rgba(135, 130, 184, 0.45);
+  }
+  .orb-2 {
+    width: 170px; height: 170px;
+    background: radial-gradient(circle at 40% 35%, #B8D2BB 0%, var(--sage) 50%, var(--sage-deep) 100%);
+    bottom: 16%; left: 7%;
+    animation: float2 11s ease-in-out infinite, fadeIn 2s 0.5s both;
+    box-shadow: 0 40px 80px -20px rgba(109, 142, 114, 0.4);
+  }
+  .orb-3 {
+    width: 88px; height: 88px;
+    background: radial-gradient(circle at 35% 30%, #F2D5C0 0%, var(--peach) 50%, var(--peach-deep) 100%);
+    top: 56%; right: 26%;
+    animation: float3 9s ease-in-out infinite, fadeIn 2s 0.8s both;
+    box-shadow: 0 30px 60px -15px rgba(210, 159, 124, 0.5);
+  }
+  /* 轨道线 */
+  .orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed rgba(26, 24, 21, 0.1);
+    pointer-events: none;
+    animation: fadeIn 2.5s 1s both;
+  }
+  .orbit-1 {
+    width: 580px; height: 580px;
+    top: -50px; right: -100px;
+  }
+  .orbit-2 {
+    width: 340px; height: 340px;
+    bottom: 4%; left: -60px;
+  }
+
+  /* Scroll提示 */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px; left: 7vw;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp 1s 1.8s both;
+  }
+  .scroll-hint .cn {
+    text-transform: none;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: var(--ink-soft);
+    animation: scrollLine 2s ease-in-out infinite;
+    transform-origin: top;
+  }
+
+  /* === INTRO / 核心定位 === */
+  .intro {
+    padding: 16vh 7vw 12vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.85fr 1.4fr;
+    gap: 5vw;
+    align-items: start;
+  }
+  
+  /* 创作者档案 — 头像+标识 */
+  .creator-card {
+    position: relative;
+  }
+  .creator-portrait-wrap {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .creator-portrait {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: contrast(1.02) saturate(0.92) brightness(1.02);
+    box-shadow: 4px 4px 0 var(--ink-line), 0 30px 60px -20px rgba(26, 24, 21, 0.18);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: block;
+  }
+  .creator-portrait:hover {
+    transform: translateY(-4px) rotate(-0.4deg);
+  }
+  .creator-portrait-tag {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(244, 237, 226, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 8px 14px;
+    border: 1px solid var(--ink-line);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .creator-portrait-tag .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+  }
+  
+  /* 浮动的小球装饰在头像周围 */
+  .portrait-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .portrait-orb-1 {
+    width: 60px; height: 60px;
+    background: radial-gradient(circle at 35% 30%, #D5D1ED 0%, var(--lavender) 50%, var(--lavender-deep) 100%);
+    top: -22px; right: -16px;
+    animation: float1 7s ease-in-out infinite;
+    box-shadow: 0 10px 24px -6px rgba(135, 130, 184, 0.5);
+  }
+  .portrait-orb-2 {
+    width: 36px; height: 36px;
+    background: radial-gradient(circle at 35% 30%, #F4D9C0 0%, var(--peach) 50%, var(--peach-deep) 100%);
+    bottom: 56px; right: -14px;
+    animation: float3 5s ease-in-out infinite;
+    box-shadow: 0 8px 20px -5px rgba(210, 159, 124, 0.5);
+  }
+
+  .creator-stamp {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    padding: 18px 20px;
+    box-shadow: 4px 4px 0 var(--ink-line);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 16px;
+    align-items: baseline;
+  }
+  .creator-stamp-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .creator-stamp-value {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .creator-stamp-value em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  .intro-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 28px;
+  }
+  .intro-tag::before {
+    content: '01';
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--peach-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .intro-tag .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.22em;
+  }
+
+  .intro-headline {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(34px, 4.4vw, 64px);
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .intro-headline .accent {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .intro-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 24px);
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    font-variation-settings: "SOFT" 100;
+    letter-spacing: -0.005em;
+  }
+
+  .intro-body {
+    padding-top: 18px;
+  }
+  .intro-body p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+  .intro-role {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .intro-role em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .intro-role .pipe {
+    color: var(--peach-deep);
+    margin: 0 8px;
+    font-weight: 300;
+  }
+
+  .intro-skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px dashed var(--ink-line);
+  }
+  .skill-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-bottom: 4px;
+  }
+  .skill-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--ink-faded);
+    font-variation-settings: "SOFT" 100;
+    flex-shrink: 0;
+  }
+  .skill-text {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .skill-text strong {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* === PLANETS === */
+  .planets-section {
+    padding: 12vh 7vw 14vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .planets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .planets-number {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(80px, 12vw, 200px);
+    line-height: 0.85;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+    letter-spacing: -0.04em;
+  }
+  .planets-title-block {
+    text-align: right;
+    max-width: 56%;
+  }
+  .planets-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .planets-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .planets-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(28px, 3.6vw, 54px);
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .planets-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+
+  /* 星球网格 */
+  .planets-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 22px;
+  }
+  
+  /* 星球档案卡片 */
+  .planet-card {
+    position: relative;
+    padding: 28px 28px 28px;
+    border-radius: 18px;
+    background: var(--paper);
+    border: 1px solid var(--ink-line);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .planet-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), var(--planet-glow, transparent) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .planet-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(26, 24, 21, 0.18);
+    box-shadow: 0 30px 60px -20px rgba(26, 24, 21, 0.16);
+  }
+  .planet-card:hover::before { opacity: 0.4; }
+  
+  .planet-card.span-7 { grid-column: span 7; }
+  .planet-card.span-5 { grid-column: span 5; }
+  .planet-card.span-6 { grid-column: span 6; }
+  .planet-card.span-4 { grid-column: span 4; }
+  .planet-card.span-3 { grid-column: span 3; }
+
+  /* 档案头：编号+档案号+小球 */
+  .dossier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--ink-line);
+  }
+  .dossier-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dossier-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .dossier-file {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+    line-height: 1;
+  }
+  .planet-orb {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .planet-card:hover .planet-orb {
+    transform: scale(1.1) rotate(15deg);
+  }
+  .planet-card.span-7 .planet-orb,
+  .planet-card.span-6 .planet-orb { width: 84px; height: 84px; }
+  
+  .planet-orb.lavender {
+    background: radial-gradient(circle at 35% 30%, #D5D1ED 0%, var(--lavender) 45%, var(--lavender-deep) 100%);
+    box-shadow: 0 12px 24px -6px rgba(135, 130, 184, 0.45), inset -6px -8px 16px rgba(0,0,0,0.12);
+  }
+  .planet-orb.sage {
+    background: radial-gradient(circle at 35% 30%, #C7DDC9 0%, var(--sage) 45%, var(--sage-deep) 100%);
+    box-shadow: 0 12px 24px -6px rgba(109, 142, 114, 0.45), inset -6px -8px 16px rgba(0,0,0,0.12);
+  }
+  .planet-orb.peach {
+    background: radial-gradient(circle at 35% 30%, #F2D5C0 0%, var(--peach) 45%, var(--peach-deep) 100%);
+    box-shadow: 0 12px 24px -6px rgba(210, 159, 124, 0.5), inset -6px -8px 16px rgba(0,0,0,0.12);
+  }
+  .planet-orb.duo-warm {
+    background: radial-gradient(circle at 30% 30%, #F2D5C0 0%, var(--peach) 35%, var(--lavender) 75%, var(--lavender-deep) 100%);
+    box-shadow: 0 12px 24px -6px rgba(210, 159, 124, 0.4), inset -6px -8px 16px rgba(0,0,0,0.12);
+  }
+  .planet-orb.duo-cool {
+    background: radial-gradient(circle at 30% 30%, #D5D1ED 0%, var(--lavender) 35%, var(--sage) 75%, var(--sage-deep) 100%);
+    box-shadow: 0 12px 24px -6px rgba(135, 130, 184, 0.4), inset -6px -8px 16px rgba(0,0,0,0.12);
+  }
+
+  /* 星球名 */
+  .planet-name-en {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4.2vw, 64px);
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-variation-settings: "SOFT" 80;
+    letter-spacing: -0.025em;
+  }
+  .planet-card.span-3 .planet-name-en,
+  .planet-card.span-4 .planet-name-en {
+    font-size: clamp(34px, 3.4vw, 48px);
+  }
+  .planet-name-en .star {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    background: var(--chrome);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .planet-name-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .planet-card.span-3 .planet-name-cn,
+  .planet-card.span-4 .planet-name-cn {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+  
+  .planet-category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--peach-deep);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .planet-category .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+  }
+  .planet-category::before {
+    content: '';
+    width: 14px;
+    height: 1px;
+    background: var(--peach-deep);
+  }
+
+  .planet-desc {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .planet-desc em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 100;
+  }
+  
+  /* 数据条 */
+  .planet-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    margin-bottom: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ink-line);
+  }
+  .planet-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .pstat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(26px, 2.6vw, 38px);
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    font-variation-settings: "SOFT" 80;
+  }
+  .pstat-num em {
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .pstat-num .unit {
+    font-size: 0.55em;
+    margin-left: 2px;
+    color: var(--ink-soft);
+    font-weight: 300;
+  }
+  .pstat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-top: 4px;
+  }
+  .pstat-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+    color: var(--ink-soft);
+  }
+
+  /* 卡片底部：项目数 + 箭头 */
+  .planet-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--ink-line);
+  }
+  .planet-projects {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .planet-projects .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+  }
+  .planet-arrow {
+    width: 36px; height: 36px;
+    border: 1px solid var(--ink-faded);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    font-size: 14px;
+  }
+  .planet-card:hover .planet-arrow {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--cream);
+    transform: rotate(-45deg);
+  }
+
+  /* === HIGHLIGHTS === */
+  .highlights {
+    padding: 16vh 7vw;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .highlights::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(181, 176, 216, 0.18) 0%, transparent 65%);
+    filter: blur(40px);
+  }
+  .highlights::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(235, 196, 166, 0.16) 0%, transparent 65%);
+    filter: blur(40px);
+  }
+
+  .highlights-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 100px;
+    position: relative; z-index: 1;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .highlights-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .highlights-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .highlights-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 76px);
+    line-height: 1;
+    text-align: right;
+    max-width: 60%;
+    font-variation-settings: "SOFT" 80;
+    letter-spacing: -0.02em;
+  }
+  .highlights-title em {
+    font-style: italic;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+  }
+  .highlights-title .cn {
+    display: block;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.4em;
+    margin-top: 16px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px 40px;
+    position: relative; z-index: 1;
+  }
+  .stat-item {
+    border-top: 1px solid rgba(244, 237, 226, 0.2);
+    padding-top: 24px;
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 6vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+    font-variation-settings: "SOFT" 80;
+  }
+  .stat-num em {
+    font-style: italic;
+    color: var(--peach);
+    font-variation-settings: "SOFT" 100;
+  }
+  .stat-num .unit {
+    font-size: 0.4em;
+    opacity: 0.8;
+    font-weight: 300;
+    margin-left: 4px;
+  }
+  .stat-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    line-height: 1.55;
+    opacity: 0.82;
+    font-weight: 400;
+  }
+  .stat-context {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-top: 6px;
+  }
+
+  /* === CONTACT === */
+  .contact {
+    padding: 18vh 7vw 8vh;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+  }
+  .contact-orb {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(235, 196, 166, 0.5) 0%, rgba(181, 176, 216, 0.3) 40%, transparent 75%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(60px);
+    z-index: 0;
+  }
+  .contact-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    position: relative; z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .contact-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.22em;
+  }
+  .contact-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(72px, 13vw, 220px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 80;
+    position: relative; z-index: 1;
+  }
+  .contact-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
+  .contact-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(18px, 1.8vw, 26px);
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-top: 36px;
+    letter-spacing: 0.12em;
+    position: relative; z-index: 1;
+  }
+  .contact-info {
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+    gap: 72px;
+    position: relative; z-index: 1;
+    flex-wrap: wrap;
+  }
+  .contact-item {
+    text-align: left;
+  }
+  .contact-item-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-bottom: 6px;
+    display: flex;
+    gap: 8px;
+  }
+  .contact-item-label .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.1em;
+  }
+  .contact-item-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  /* === SOCIALS === */
+  .socials-row {
+    margin-top: 80px;
+    position: relative; z-index: 1;
+  }
+  .socials-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    display: flex; justify-content: center; gap: 8px;
+  }
+  .socials-eyebrow .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.2em;
+  }
+  .socials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    box-shadow: 4px 4px 0 var(--ink-line);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .social-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .social-card.xhs::before {
+    background: radial-gradient(circle at 20% 50%, rgba(255, 100, 100, 0.12) 0%, transparent 60%);
+  }
+  .social-card.dy::before {
+    background: radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.08) 0%, transparent 60%);
+  }
+  .social-card.bili::before {
+    background: radial-gradient(circle at 20% 50%, rgba(0, 175, 240, 0.12) 0%, transparent 60%);
+  }
+  .social-card:hover {
+    transform: translate(-2px, -4px);
+    box-shadow: 8px 8px 0 var(--ink-line);
+  }
+  .social-card:hover::before {
+    opacity: 1;
+  }
+  .social-icon {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+  }
+  .social-card.xhs:hover .social-icon { background: #FF2741; }
+  .social-card.dy:hover .social-icon { background: #000; }
+  .social-card.bili:hover .social-icon { background: #00AEEC; }
+  .social-icon svg { width: 22px; height: 22px; }
+  
+  .social-info {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+  }
+  .social-platform {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .social-handle {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .social-arrow {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--ink-faded);
+    font-weight: 300;
+    transition: transform 0.4s ease, color 0.4s ease;
+    flex-shrink: 0;
+  }
+  .social-card:hover .social-arrow {
+    color: var(--ink);
+    transform: translateX(6px);
+  }
+
+  /* === Footer === */
+  footer {
+    padding: 36px 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--ink-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    text-transform: none;
+    letter-spacing: 0.12em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-18px, 28px); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(22px, -18px); }
+  }
+  @keyframes float3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-15px, -22px) scale(1.06); }
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.3); opacity: 0.3; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-meta { display: none; }
+    .hero { padding: 0 6vw; }
+    .hero-title .line2 { padding-left: 6vw; }
+    .hero-title .line3 { padding-left: 2vw; }
+    .orb-1 { width: 220px; height: 220px; }
+    .orb-2 { width: 110px; height: 110px; }
+    .intro { grid-template-columns: 1fr; padding: 12vh 6vw 10vh; gap: 40px; }
+    .intro-skills { grid-template-columns: 1fr; }
+    .planets-header { flex-direction: column; align-items: flex-start; }
+    .planets-title-block { text-align: left; max-width: 100%; }
+    .planets-grid { grid-template-columns: 1fr; }
+    .planet-card.span-7, .planet-card.span-5,
+    .planet-card.span-6, .planet-card.span-4,
+    .planet-card.span-3 { grid-column: span 1; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+    .highlights-header { flex-direction: column; }
+    .highlights-title { text-align: left; max-width: 100%; }
+    .contact-info { flex-direction: column; gap: 28px; align-items: center; }
+    .contact-item { text-align: center; }
+    .contact-item-label { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark"><em>He</em> Weijin · Portfolio <span class="cn">何为进 · 作品集</span></div>
+  <div class="nav-meta">
+    <span>MMXXVI / 2026</span>
+    <span>INFJ — A</span>
+    <span>Beijing / 北京</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orbit orbit-1"></div>
+  <div class="orbit orbit-2"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-eyebrow">
+    PORTFOLIO / 2026 EDITION
+    <span class="cn">· 作品集 · 2026 年版</span>
+  </div>
+  
+  <h1 class="hero-title">
+    <span class="line1">A <em>Soft</em> Universe</span>
+    <span class="line2">of Making <span class="amp">&</span></span>
+    <span class="line3"><em>Things</em> Visible</span>
+  </h1>
+
+  <div class="hero-subtitle">
+    <span class="hero-cn">把想法变可见之物的柔软宇宙</span>
+    <span class="hero-meta">A portfolio by He Weijin · 何为进</span>
+  </div>
+
+  <div class="scroll-hint">Scroll to enter <span class="cn">· 滚动进入宇宙</span></div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="creator-card reveal">
+    <div class="creator-portrait-wrap">
+      <div class="portrait-orb portrait-orb-1"></div>
+      <div class="portrait-orb portrait-orb-2"></div>
+      <img class="creator-portrait" src="assets/portrait-2.jpg" alt="He Weijin 何为进">
+      <div class="creator-portrait-tag">
+        HE WEIJIN
+        <span class="cn">何为进</span>
+      </div>
+    </div>
+    
+    <div class="creator-stamp">
+      <div class="creator-stamp-label">ROLE<br><span style="font-family: 'Noto Sans SC', sans-serif; text-transform: none; letter-spacing: 0.1em; color: var(--ink-soft);">角色</span></div>
+      <div class="creator-stamp-value"><em>AI-native</em> Creative Operator<br>混合型内容与 AI 产品创作者</div>
+
+      <div class="creator-stamp-label">BG<br><span style="font-family: 'Noto Sans SC', sans-serif; text-transform: none; letter-spacing: 0.1em; color: var(--ink-soft);">背景</span></div>
+      <div class="creator-stamp-value">北京工业大学 · 计算机</div>
+
+      <div class="creator-stamp-label">MBTI</div>
+      <div class="creator-stamp-value">INFJ — A</div>
+
+      <div class="creator-stamp-label">BASED<br><span style="font-family: 'Noto Sans SC', sans-serif; text-transform: none; letter-spacing: 0.1em; color: var(--ink-soft);">所在</span></div>
+      <div class="creator-stamp-value">Beijing · 北京</div>
+    </div>
+  </div>
+
+  <div class="intro-body reveal">
+    <div class="intro-tag">
+      About / <span class="cn">自序</span>
+    </div>
+    <h2 class="intro-headline">
+      我是<span class="accent">何为进</span>，<br>
+      一个用 AI 与故事<span class="accent">造物</span>的人。
+    </h2>
+    <p class="intro-en">An <em>AI-native</em> creative operator.</p>
+
+    <p class="intro-role">
+      <em>AI-native Creative Operator</em>
+      <span class="pipe">·</span>
+      混合型内容与 AI 产品创作者
+    </p>
+    <p>
+      本科北京工业大学计算机，擅长把<strong>抽象的想法变成具体的东西</strong>。
+      喜欢用 AI 工具与人类直觉，把想法穿过原型、影像、社群、文字——
+      从概念推进到<strong>作品、产品原型或可传播的内容</strong>。
+    </p>
+    <p style="opacity: 0.85;">
+      经验涵盖 AIGC 动画短片创作、AI 应用项目（产品设计 / Prompt / Agent / LLM 工作流）、视频账号运营与数据分析、社群与产品冷启动增长、小说世界观构建、视觉排版设计等不同领域。
+    </p>
+
+    <div class="intro-skills">
+      <div class="skill-row">
+        <span class="skill-num">i.</span>
+        <span class="skill-text"><strong>AI 应用与产品</strong>　Prompt / Agent / LLM 工作流</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-num">ii.</span>
+        <span class="skill-text"><strong>AIGC 影像</strong>　动画短片完整创作流程</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-num">iii.</span>
+        <span class="skill-text"><strong>内容与增长</strong>　视频创作 / 账号运营 / 数据复盘</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-num">iv.</span>
+        <span class="skill-text"><strong>社群运营</strong>　冷启动到 1w+ 成员</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-num">v.</span>
+        <span class="skill-text"><strong>文学创作</strong>　长篇小说与世界观</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-num">vi.</span>
+        <span class="skill-text"><strong>视觉设计</strong>　排版 / 物料 / 视觉系统</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANETS -->
+<section class="planets-section" id="planets">
+  <div class="planets-header reveal">
+    <div class="planets-number">02</div>
+    <div class="planets-title-block">
+      <div class="planets-eyebrow">
+        The Five Planets / <span class="cn">五颗星球</span>
+      </div>
+      <h2 class="planets-title">
+        每一颗都是<br>一种<em>讲故事的方式</em>
+      </h2>
+    </div>
+  </div>
+
+  <div class="planets-grid">
+
+    <!-- Planet 01 · NOVA · 启明 -->
+    <a href="planet-01.html" class="planet-card span-7 reveal" style="--planet-glow: rgba(135, 130, 184, 0.28);">
+      <div class="dossier-header">
+        <div class="dossier-meta">
+          <span class="dossier-id">Planet Dossier · 星球档案</span>
+          <span class="dossier-file">File №. <em>01</em></span>
+        </div>
+        <div class="planet-orb lavender"></div>
+      </div>
+
+      <div class="planet-name-en"><span class="star">N</span>OVA</div>
+      <div class="planet-name-cn">启明</div>
+      <div class="planet-category">
+        AI Applications
+        <span class="cn">· AI 应用与产品实验</span>
+      </div>
+      <p class="planet-desc">
+        把抽象的 AI 能力<em>落地为可被使用的产品</em>。从 Prompt Engineering、LLM 自动化工作流，到从一线洞察推动产品功能上线——这颗星球记录的是"<em>AI 如何真正进入业务</em>"。
+      </p>
+      
+      <div class="planet-stats">
+        <div class="planet-stat">
+          <div class="pstat-num">+9<em>%</em></div>
+          <div class="pstat-label">CONVERSION<span class="cn">产品转化率</span></div>
+        </div>
+        <div class="planet-stat">
+          <div class="pstat-num">+18<em>%</em></div>
+          <div class="pstat-label">RETENTION<span class="cn">用户留存</span></div>
+        </div>
+        <div class="planet-stat">
+          <div class="pstat-num">3<em><span class="unit">张</span></em></div>
+          <div class="pstat-label">CERTS<span class="cn">行业认证</span></div>
+        </div>
+      </div>
+
+      <div class="planet-footer">
+        <span class="planet-projects">4 PROJECTS <span class="cn">· 4 个核心项目</span></span>
+        <div class="planet-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Planet 02 · LUMINA · 流光 -->
+    <a href="planet-02.html" class="planet-card span-5 reveal" style="--planet-glow: rgba(232, 184, 96, 0.22);">
+      <div class="dossier-header">
+        <div class="dossier-meta">
+          <span class="dossier-id">Planet Dossier · 星球档案</span>
+          <span class="dossier-file">File №. <em>02</em></span>
+        </div>
+        <div class="planet-orb duo-warm"></div>
+      </div>
+
+      <div class="planet-name-en"><span class="star">L</span>UMINA</div>
+      <div class="planet-name-cn">流光</div>
+      <div class="planet-category">
+        AIGC Films
+        <span class="cn">· AI 影像与动画短片</span>
+      </div>
+      <p class="planet-desc">
+        从故事设定、分镜、AI 生图到剪辑成片——<em>完整的创作流程</em>，让算法之美与人类情感共同流动。
+      </p>
+      
+      <div class="planet-stats">
+        <div class="planet-stat">
+          <div class="pstat-num">2<em><span class="unit">部</span></em></div>
+          <div class="pstat-label">SHORT FILMS<span class="cn">完整短片</span></div>
+        </div>
+        <div class="planet-stat">
+          <div class="pstat-num">∞</div>
+          <div class="pstat-label">WORKFLOW<span class="cn">完整工作流</span></div>
+        </div>
+      </div>
+
+      <div class="planet-footer">
+        <span class="planet-projects">3 PROJECTS <span class="cn">· 3 个项目</span></span>
+        <div class="planet-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Planet 03 · ECHO · 回潮 -->
+    <a href="planet-03.html" class="planet-card span-6 reveal" style="--planet-glow: rgba(109, 142, 114, 0.25);">
+      <div class="dossier-header">
+        <div class="dossier-meta">
+          <span class="dossier-id">Planet Dossier · 星球档案</span>
+          <span class="dossier-file">File №. <em>03</em></span>
+        </div>
+        <div class="planet-orb sage"></div>
+      </div>
+
+      <div class="planet-name-en"><span class="star">E</span>CHO</div>
+      <div class="planet-name-cn">回潮</div>
+      <div class="planet-category">
+        Content &amp; Growth
+        <span class="cn">· 内容创作与账号增长</span>
+      </div>
+      <p class="planet-desc">
+        让每一条内容找到它的潮汐——<em>选题、剪辑、复盘、增长</em>。从 45 万+ 播放的爆款，到把激活成本降低 22% 的数据策略。
+      </p>
+      
+      <div class="planet-stats">
+        <div class="planet-stat">
+          <div class="pstat-num">45<em><span class="unit">万+</span></em></div>
+          <div class="pstat-label">PEAK VIEWS<span class="cn">单条最高播放</span></div>
+        </div>
+        <div class="planet-stat">
+          <div class="pstat-num">−22<em>%</em></div>
+          <div class="pstat-label">CAC<span class="cn">激活成本</span></div>
+        </div>
+        <div class="planet-stat">
+          <div class="pstat-num">1.8<em>×</em></div>
+          <div class="pstat-label">REACH<span class="cn">双周曝光</span></div>
+        </div>
+      </div>
+
+      <div class="planet-footer">
+        <span class="planet-projects">MULTI-PLATFORM <span class="cn">· 多平台账号</span></span>
+        <div class="planet-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Planet 04 · MYTHOS · 浮野 -->
+    <a href="planet-04.html" class="planet-card span-3 reveal" style="--planet-glow: rgba(210, 159, 124, 0.28);">
+      <div class="dossier-header">
+        <div class="dossier-meta">
+          <span class="dossier-id">星球档案</span>
+          <span class="dossier-file">№. <em>04</em></span>
+        </div>
+        <div class="planet-orb peach"></div>
+      </div>
+
+      <div class="planet-name-en"><span class="star">M</span>YTHOS</div>
+      <div class="planet-name-cn">浮野</div>
+      <div class="planet-category">
+        Narrative
+        <span class="cn">· 文学世界观</span>
+      </div>
+      <p class="planet-desc">
+        最慢、最久的叙事——一个独立构建的<em>小说宇宙</em>。
+      </p>
+      
+      <div class="planet-stats">
+        <div class="planet-stat">
+          <div class="pstat-num">1<em><span class="unit">部</span></em></div>
+          <div class="pstat-label">WORLD<span class="cn">长篇连载</span></div>
+        </div>
+      </div>
+
+      <div class="planet-footer">
+        <span class="planet-projects">ONGOING <span class="cn">· 连载中</span></span>
+        <div class="planet-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Planet 05 · PRISM · 折光 -->
+    <a href="planet-05.html" class="planet-card span-3 reveal" style="--planet-glow: rgba(135, 130, 184, 0.25);">
+      <div class="dossier-header">
+        <div class="dossier-meta">
+          <span class="dossier-id">星球档案</span>
+          <span class="dossier-file">№. <em>05</em></span>
+        </div>
+        <div class="planet-orb duo-cool"></div>
+      </div>
+
+      <div class="planet-name-en"><span class="star">P</span>RISM</div>
+      <div class="planet-name-cn">折光</div>
+      <div class="planet-category">
+        Editorial
+        <span class="cn">· 视觉编辑</span>
+      </div>
+      <p class="planet-desc">
+        把信息经过棱镜<em>重新折射</em>——让"知道"变成"愿意看完"。
+      </p>
+      
+      <div class="planet-stats">
+        <div class="planet-stat">
+          <div class="pstat-num">1,028</div>
+          <div class="pstat-label">PEAK ENGAGE<span class="cn">单篇互动峰值</span></div>
+        </div>
+      </div>
+
+      <div class="planet-footer">
+        <span class="planet-projects">SERIES <span class="cn">· 系列作品</span></span>
+        <div class="planet-arrow">→</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights">
+  <div class="highlights-header reveal">
+    <div class="highlights-eyebrow">
+      03 — Selected Numbers
+      <span class="cn">· 重要数字</span>
+    </div>
+    <h2 class="highlights-title">
+      小<em>数字</em>背后，<br>是一个个具体的人
+      <span class="cn">Numbers tell stories, but people make them real.</span>
+    </h2>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num">45<em>万+</em></div>
+      <div class="stat-label">单条视频最高播放</div>
+      <div class="stat-context">AIGC 手书 · 实习独立完成</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">+4<em><span class="unit">pp</span></em></div>
+      <div class="stat-label">推动产品功能上线 · 次留率提升</div>
+      <div class="stat-context">语鲸 APP · 推动新功能上线</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">−22<em>%</em></div>
+      <div class="stat-label">获客平均激活成本</div>
+      <div class="stat-context">四象限模型 · 数据分析</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">15<em>%</em></div>
+      <div class="stat-label">平台新增激活用户贡献</div>
+      <div class="stat-context">素材库 · 规模化复制</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">2.5<em>w+</em></div>
+      <div class="stat-label">豆瓣大组新增成员</div>
+      <div class="stat-context">榜单图书鉴评中心 · 32w+ 成员社群</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">10<em>w+</em></div>
+      <div class="stat-label">阿那亚戏剧节线上触达</div>
+      <div class="stat-context">报名转化率 8%</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">+9<em>%</em></div>
+      <div class="stat-label">海外用户产品转化率</div>
+      <div class="stat-context">Reddit / Discord · A/B 测试</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">3<em><span class="unit">张</span></em></div>
+      <div class="stat-label">AI 行业认证</div>
+      <div class="stat-context">华为云 / 扣子空间 / 讯飞星火</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="contact-orb"></div>
+  <div class="contact-eyebrow">
+    04 — Get in touch
+    <span class="cn">· 保持联系</span>
+  </div>
+  <h2 class="contact-title">Let's <em>talk</em>.</h2>
+  <div class="contact-cn">如果你想合作、聊聊、或者认识一下</div>
+  
+  <div class="contact-info">
+    <div class="contact-item">
+      <div class="contact-item-label">EMAIL <span class="cn">· 邮箱</span></div>
+      <div class="contact-item-value">3384759349@qq.com</div>
+    </div>
+  </div>
+
+  <!-- Social Links -->
+  <div class="socials-row reveal">
+    <div class="socials-eyebrow">
+      Find me here
+      <span class="cn">· 在这些平台找到我</span>
+    </div>
+    <div class="socials-grid">
+      <a href="https://xhslink.com/m/6NaBrbRj77P" target="_blank" rel="noopener" class="social-card xhs">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm2.5 5v6h1.4v-2.3h1.4l1.2 2.3h1.6l-1.4-2.55c.8-.3 1.3-1 1.3-1.85 0-1.15-.85-1.6-2-1.6H7.5zm1.4 1.2h1.1c.6 0 .9.25.9.7s-.3.7-.9.7H8.9V10.2zm6.6-1.2v6h1.4v-6h-1.4z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-platform">小红书 / Xiaohongshu</div>
+          <div class="social-handle">@芝士围巾</div>
+        </div>
+        <div class="social-arrow">→</div>
+      </a>
+      
+      <a href="https://v.douyin.com/XRCgVKQpj2w/" target="_blank" rel="noopener" class="social-card dy">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-1.16-.76-2-2.05-2.16-3.55v-.45h-2.95v11.78c0 1.45-1.18 2.62-2.63 2.62a2.62 2.62 0 0 1-2.62-2.62 2.62 2.62 0 0 1 2.62-2.63c.27 0 .54.04.79.13V8.15a5.62 5.62 0 0 0-.79-.06A5.55 5.55 0 0 0 3.3 13.6a5.55 5.55 0 0 0 5.56 5.55 5.55 5.55 0 0 0 5.55-5.55V8.07a8.55 8.55 0 0 0 5 1.6V6.74c-1.07 0-2.07-.32-2.9-.87z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-platform">抖音 / Douyin</div>
+          <div class="social-handle">@芝士围巾</div>
+        </div>
+        <div class="social-arrow">→</div>
+      </a>
+
+      <a href="https://b23.tv/OGhwAiT" target="_blank" rel="noopener" class="social-card bili">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.22 3.4l-1.4 1.4-2.13 2.14h2.66c1.06 0 1.93.86 1.93 1.93v8.27c0 1.06-.87 1.93-1.93 1.93H6.65c-1.06 0-1.93-.87-1.93-1.93V8.86c0-1.06.87-1.93 1.93-1.93h2.67L7.18 4.8 5.78 3.4l-.88.88L7.84 7.2h-.92A2.93 2.93 0 0 0 4 10.13v7c0 1.62 1.3 2.93 2.92 2.93H17.07A2.93 2.93 0 0 0 20 17.13v-7a2.93 2.93 0 0 0-2.92-2.93h-.92l2.93-2.92-.87-.88zM8.61 11.6c.5 0 .91.4.91.91v1.39c0 .5-.4.91-.91.91s-.91-.4-.91-.91v-1.39c0-.5.4-.91.91-.91zm6.77 0c.5 0 .91.4.91.91v1.39c0 .5-.4.91-.91.91s-.91-.4-.91-.91v-1.39c0-.5.4-.91.91-.91z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-platform">Bilibili / B 站</div>
+          <div class="social-handle">@芝士围巾</div>
+        </div>
+        <div class="social-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© MMXXVI · He Weijin · <span class="cn">何为进 · 2026</span></div>
+  <div>Crafted with care · <span class="cn">用心制作</span></div>
+</footer>
+
+<!-- Star dust canvas — 鼠标跟随的星尘粒子 -->
+<canvas id="stardust" style="position: fixed; inset: 0; pointer-events: none; z-index: 99;"></canvas>
+
+<script>
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Planet card glow follows cursor
+  document.querySelectorAll('.planet-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', x + '%');
+      card.style.setProperty('--my', y + '%');
+    });
+  });
+
+  // ===========================================
+  // STARDUST — 鼠标轨迹的星尘粒子（柔软风格）
+  // ===========================================
+  (function() {
+    const canvas = document.getElementById('stardust');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const colors = ['rgba(173, 168, 208, ', 'rgba(235, 196, 166, ', 'rgba(148, 179, 152, '];
+    let lastEmit = 0;
+    const EMIT_INTERVAL = 60; // ms between emits
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    window.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastEmit < EMIT_INTERVAL) return;
+      lastEmit = now;
+      
+      const count = 1 + Math.floor(Math.random() * 2);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: e.clientX + (Math.random() - 0.5) * 8,
+          y: e.clientY + (Math.random() - 0.5) * 8,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4 - 0.2,
+          size: Math.random() * 2.2 + 0.6,
+          life: 1,
+          decay: 0.012 + Math.random() * 0.012,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+      if (particles.length > 200) particles = particles.slice(-200);
+    }, { passive: true });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.fillStyle = p.color + (p.life * 0.7) + ')';
+        ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  // ===========================================
+  // PARALLAX — Hero 球体跟随鼠标轻微浮动
+  // ===========================================
+  (function() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    const orbs = hero.querySelectorAll('.orb');
+    
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      
+      orbs.forEach((orb, i) => {
+        const depth = (i + 1) * 8;
+        orb.style.setProperty('--px', `${x * depth}px`);
+        orb.style.setProperty('--py', `${y * depth}px`);
+      });
+    });
+  })();
+
+  // ===========================================
+  // EASTER EGG — 滚动到底触发流星
+  // ===========================================
+  (function() {
+    let triggered = false;
+    window.addEventListener('scroll', () => {
+      if (triggered) return;
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = document.documentElement.scrollHeight;
+      if (scrolled / total < 0.92) return;
+      triggered = true;
+      // 触发一波流星
+      const canvas = document.getElementById('stardust');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const event = new MouseEvent('mousemove', {
+            clientX: Math.random() * window.innerWidth,
+            clientY: Math.random() * window.innerHeight * 0.7
+          });
+          window.dispatchEvent(event);
+        }, i * 80);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
