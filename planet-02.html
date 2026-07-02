@@ -1779,6 +1779,43 @@
     box-shadow: 6px 6px 0 var(--ink-line);
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
+  .film-card,
+  .mini-work,
+  .film-step,
+  .workflow-doc-link {
+    position: relative;
+    isolation: isolate;
+  }
+  .film-card,
+  .mini-work,
+  .film-step {
+    overflow: hidden;
+    transform-origin: center;
+    will-change: transform;
+  }
+  .film-card::after,
+  .mini-work::after,
+  .film-step::after {
+    content: '';
+    position: absolute;
+    inset: -22%;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(235, 196, 166, 0.22) 0%, rgba(181, 176, 216, 0.12) 22%, transparent 46%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .film-card:hover::after,
+  .mini-work:hover::after,
+  .film-step:hover::after {
+    opacity: 1;
+  }
+  .film-card > *,
+  .mini-work > *,
+  .film-step > * {
+    position: relative;
+    z-index: 1;
+  }
   .film-card:hover {
     transform: translate(-3px, -6px);
     box-shadow: 12px 12px 0 var(--ink-line);
@@ -1796,6 +1833,16 @@
     min-height: 420px;
     aspect-ratio: 16/10;
   }
+  .film-poster::before {
+    content: '';
+    position: absolute;
+    inset: -12%;
+    background: linear-gradient(115deg, transparent 26%, rgba(255, 255, 255, 0.16) 48%, transparent 72%);
+    transform: translateX(-140%);
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
   .film-poster img {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -1804,6 +1851,9 @@
   }
   .film-card:hover .film-poster img {
     transform: scale(1.04);
+  }
+  .film-card:hover .film-poster::before {
+    transform: translateX(120%);
   }
   .film-poster-overlay {
     position: absolute;
@@ -2190,10 +2240,22 @@
     text-transform: uppercase;
     transition: all 0.3s ease;
   }
+  .workflow-doc-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.16) 48%, transparent 78%);
+    transform: translateX(-145%);
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
   .workflow-doc-link:hover {
     background: var(--cream);
     color: var(--ink);
     border-color: var(--cream);
+  }
+  .workflow-doc-link:hover::before {
+    transform: translateX(140%);
   }
   .workflow-doc-link .cn {
     font-family: 'Noto Sans SC', sans-serif;
@@ -2326,6 +2388,21 @@
     .film-step:nth-child(2n) { border-right: none; }
     .mini-works { grid-template-columns: 1fr; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .film-card,
+    .mini-work,
+    .film-step,
+    .workflow-doc-link {
+      transition: none;
+    }
+    .film-card::after,
+    .mini-work::after,
+    .film-step::after,
+    .film-poster::before,
+    .workflow-doc-link::before {
+      display: none;
+    }
+  }
 </style>
 </head>
 <body>
@@ -2357,7 +2434,7 @@
 
   <p class="planet-tagline">
     LUMINA 是<em>流动的光</em>——这颗星球收藏每一帧 AI 影像。
-    从赛博机娘伫立的 <em>2126 年人类博物馆</em>，到正在后期制作的定格动画 <em>《夜色盛放》</em>，再到全网 45w+ 播放的 AIGC 手书短片——我用一整套 AI 工作流，<em>把故事变成可以播放的光</em>。
+    从探讨人类本质与未来可能性的 <em>2126 年人类博物馆</em>，到正在后期制作的定格动画 <em>《夜色盛放》</em>，再到全网 45w+ 播放的 AIGC 手书短片——我用一整套 AI 工作流，<em>把故事变成可以播放的光</em>。
   </p>
 
   <div class="quick-stats">
@@ -2460,13 +2537,13 @@
 
   <div class="film-card reverse reveal">
     <div class="film-poster">
-      <img src="assets/lumina/museum-hero.jpg" alt="人类博物馆 主视觉">
+      <img src="assets/lumina/museum-hero.jpg" alt="人类博物馆未来科幻主视觉">
       <div class="film-poster-overlay"></div>
       <div class="film-poster-status live">
         <span class="status-dot"></span>LIVE · 已上线
       </div>
       <div class="film-poster-title-overlay">
-        Human Museum / 人类博物馆 / Est. 2126
+        Human Museum / Future Sci-Fi / Est. 2126
       </div>
     </div>
     <div class="film-info">
@@ -2483,7 +2560,7 @@
 
       <p class="film-synopsis">
         故事设定在 <em>2126 年</em>——一座保留人类最后记忆的博物馆。
-        从赛博机娘的主视觉，到末日废墟与穹顶建筑的世界观铺陈，整片由<strong>独立 AI 工作流</strong>完成。
+        从未来科幻主视觉，到末日废墟与穹顶建筑的世界观铺陈，整片围绕<strong>人类本质与未来可能性</strong>展开，并由独立 AI 工作流完成。
       </p>
 
       <div class="film-mini-stats">
@@ -2679,13 +2756,6 @@
     </div>
   </div>
 
-  <div class="workflow-cta">
-    <a href="https://gcnc1ndcwmfy.feishu.cn/wiki/TyegwrCEUihkJskQblfchWegnhg?from=from_copylink" target="_blank" rel="noopener" class="workflow-doc-link reveal">
-      OPEN FULL WORKFLOW
-      <span class="cn">· 完整工作流文档（飞书）</span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
 </section>
 
 <!-- NEXT PLANET -->
@@ -2708,6 +2778,32 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  (function() {
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canHover || reduceMotion) return;
+
+    const cards = document.querySelectorAll('.film-card, .mini-work, .film-step');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rx = (0.5 - py) * 3.6;
+        const ry = (px - 0.5) * 4.8;
+        const lift = card.classList.contains('film-step') ? -2 : -4;
+
+        card.style.setProperty('--mx', `${px * 100}%`);
+        card.style.setProperty('--my', `${py * 100}%`);
+        card.style.transform = `perspective(1200px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(${lift}px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  })();
 </script>
 
 </body>

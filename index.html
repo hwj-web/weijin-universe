@@ -713,6 +713,23 @@
     color: var(--ink);
     font-variation-settings: "SOFT" 100;
   }
+  .planet-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .planet-keywords span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--ink-line);
+    background: rgba(251, 248, 242, 0.72);
+  }
   
   /* 数据条 */
   .planet-stats {
@@ -1291,11 +1308,6 @@
     </h2>
     <p class="intro-en">An <em>AI-native</em> creative operator.</p>
 
-    <p class="intro-role">
-      <em>AI-native Creative Operator</em>
-      <span class="pipe">·</span>
-      混合型内容与 AI 产品创作者
-    </p>
     <p>
       本科北京工业大学计算机，擅长把<strong>抽象的想法变成具体的东西</strong>。
       喜欢用 AI 工具与人类直觉，把想法穿过原型、影像、社群、文字——
@@ -1363,12 +1375,19 @@
       <div class="planet-name-en"><span class="star">N</span>OVA</div>
       <div class="planet-name-cn">启明</div>
       <div class="planet-category">
-        AI Applications
-        <span class="cn">· AI 应用与产品实验</span>
+        AI Product &amp; Interaction Lab
+        <span class="cn">· AI 产品与交互实验室</span>
       </div>
       <p class="planet-desc">
-        把抽象的 AI 能力<em>落地为可被使用的产品</em>。从 Prompt Engineering、LLM 自动化工作流，到从一线洞察推动产品功能上线——这颗星球记录的是"<em>AI 如何真正进入业务</em>"。
+        从工业检测系统到音乐疗愈、情感交互与 Prompt 实验，我把 AI 当作一种新的产品材料：既关注技术能做什么，也关注它如何被人真正使用、理解和信任。
       </p>
+      <div class="planet-keywords">
+        <span>AI Product Design</span>
+        <span>Prompt Design</span>
+        <span>Multimodal AI</span>
+        <span>Emotional UX</span>
+        <span>Creative Coding</span>
+      </div>
       
       <div class="planet-stats">
         <div class="planet-stat">
@@ -1386,7 +1405,7 @@
       </div>
 
       <div class="planet-footer">
-        <span class="planet-projects">4 PROJECTS <span class="cn">· 4 个核心项目</span></span>
+        <span class="planet-projects">AI PRODUCT LAB <span class="cn">· AI 产品与交互实验室</span></span>
         <div class="planet-arrow">→</div>
       </div>
     </a>

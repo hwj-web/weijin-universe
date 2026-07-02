@@ -332,6 +332,20 @@
     font-weight: 400;
     letter-spacing: 0.04em;
   }
+  .section-summary {
+    max-width: 760px;
+    margin-top: -24px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+  }
+  .section-summary em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--lavender-deep);
+    font-variation-settings: "SOFT" 100;
+  }
 
   /* === Projects List === */
   .projects {
@@ -456,6 +470,14 @@
     color: var(--lavender-deep);
     font-variation-settings: "SOFT" 100;
   }
+  .project-tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .project-tag-row .tech-chip {
+    background: rgba(251, 248, 242, 0.76);
+  }
 
   .project-results {
     display: flex;
@@ -465,6 +487,61 @@
     background: var(--paper);
     border: 1px solid var(--ink-line);
     border-radius: 14px;
+  }
+  .project-results,
+  .tech-dossier,
+  .project-pull-horizontal,
+  .cert-card,
+  .slot {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transform-origin: center;
+    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease, border-color 0.35s ease;
+    will-change: transform;
+  }
+  .project-results::after,
+  .tech-dossier::after,
+  .project-pull-horizontal::after,
+  .cert-card::after,
+  .slot::after {
+    content: '';
+    position: absolute;
+    inset: -24%;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(181, 176, 216, 0.18) 0%, rgba(235, 196, 166, 0.12) 20%, transparent 44%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .project-results:hover::after,
+  .tech-dossier:hover::after,
+  .project-pull-horizontal:hover::after,
+  .cert-card:hover::after,
+  .slot:hover::after {
+    opacity: 1;
+  }
+  .project-results > *,
+  .tech-dossier > *,
+  .project-pull-horizontal > *,
+  .cert-card > *,
+  .slot > * {
+    position: relative;
+    z-index: 1;
+  }
+  .project-results:hover,
+  .project-pull-horizontal:hover {
+    box-shadow: 0 18px 36px -28px rgba(26, 24, 21, 0.28);
+  }
+  .tech-dossier:hover {
+    box-shadow: 10px 10px 0 var(--ink-line);
+  }
+  .slot .slot-media-img {
+    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+  }
+  .slot:hover .slot-media-img {
+    transform: scale(1.035);
+    filter: saturate(1.02) contrast(1.02);
   }
   .pres-item {
     display: flex;
@@ -619,6 +696,12 @@
     text-transform: none;
     letter-spacing: 0.1em;
     margin-left: 4px;
+  }
+  .slot-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   /* 不同色调的图片 slot */
   .slot-tone-lavender { 
@@ -1052,6 +1135,24 @@
     .project-num-block { position: relative; top: auto; }
     .certs-grid { grid-template-columns: 1fr; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .project-results,
+    .tech-dossier,
+    .project-pull-horizontal,
+    .cert-card,
+    .slot,
+    .hackathon-link {
+      transition: none;
+    }
+    .project-results::after,
+    .tech-dossier::after,
+    .project-pull-horizontal::after,
+    .cert-card::after,
+    .slot::after,
+    .hackathon-link::before {
+      display: none;
+    }
+  }
 
   /* ============================================
      TECH DOSSIER — 图 4 卷宗版式（仅用于 MLLM 项目）
@@ -1371,11 +1472,23 @@
     transition: all 0.35s ease;
     border: 1px solid var(--ink);
   }
+  .hackathon-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.22) 48%, transparent 76%);
+    transform: translateX(-140%);
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
   .hackathon-link:hover {
     background: var(--lavender-deep);
     border-color: var(--lavender-deep);
     transform: translate(-2px, -2px);
     box-shadow: 4px 4px 0 var(--ink-line);
+  }
+  .hackathon-link:hover::before {
+    transform: translateX(140%);
   }
   .hackathon-link .cn {
     font-family: 'Noto Sans SC', sans-serif;
@@ -1388,6 +1501,22 @@
     transition: transform 0.3s ease;
   }
   .hackathon-link:hover .arrow { transform: translateX(4px); }
+  .hackathon-link.light {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink-line);
+  }
+  .hackathon-link.light:hover {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--lavender-deep);
+  }
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
   
   /* live-dot 内联使用 */
   .live-dot {
@@ -1618,21 +1747,21 @@
       <h1 class="planet-title-en"><span class="star">N</span>OVA</h1>
       <div class="planet-title-cn">启明</div>
       <div class="planet-category-row">
-        AI Applications
-        <span class="cn">· AI 应用与产品实验</span>
+        AI Product &amp; Interaction Lab
+        <span class="cn">· AI 产品与交互实验室</span>
       </div>
     </div>
   </div>
 
   <p class="planet-tagline">
-    NOVA 是夜空里第一颗被点亮的星——也是这颗星球的隐喻。
-    在这里，我把抽象的 <em>AI 能力</em>落地为<em> 可被使用的产品</em>：从 Prompt 设计、LLM 工作流的搭建，到一线用户洞察推动产品功能上线，再到本科毕设里的多模态大模型应用。
+    NOVA 是夜空里第一颗被点亮的星，也是这颗星球的隐喻。
+    在这里，我把抽象的 <em>AI 能力</em>落地为<em>可被使用的产品</em>：从工业检测系统、Prompt Workflow 与增长实验，到音乐疗愈、情感交互与长期对话研究，关心的不只是模型能做什么，也关心它如何被人真正理解、使用与信任。
   </p>
 
   <div class="quick-stats">
     <div class="qstat">
-      <span class="qstat-num">4<em><span class="unit">个</span></em></span>
-      <span class="qstat-label">CORE PROJECTS<span class="cn">核心项目</span></span>
+      <span class="qstat-num">7<em><span class="unit">个</span></em></span>
+      <span class="qstat-label">CASE STUDIES<span class="cn">案例项目</span></span>
     </div>
     <div class="qstat">
       <span class="qstat-num">+9<em>%</em></span>
@@ -1661,10 +1790,13 @@
       <span class="cn">· 核心项目</span>
     </div>
     <h2 class="section-title">
-      四件<em>把 AI 落地</em>的事
-      <span class="cn">Four things that brought AI into real products.</span>
+      七个关于<em>AI 产品与交互</em>的案例
+      <span class="cn">Seven case studies on AI products, workflows, and interaction.</span>
     </h2>
   </div>
+  <p class="section-summary reveal">
+    这里收录我围绕多模态 AI、AI 产品设计、Prompt Workflow 与情感交互所做的实验。它们不只展示模型能力，也尝试回答：AI 如何变成真正可被理解、可被使用、可被信任的产品体验。
+  </p>
 
   <div class="projects">
 
@@ -1859,17 +1991,17 @@
       <div class="project-num-block">
         <div class="project-num">iv.</div>
         <div class="project-tag">
-          THESIS · MLLM
-          <span>本科毕业设计</span>
+          THESIS · COMPLETED
+          <span>本科毕业设计 / 已完成答辩</span>
         </div>
       </div>
       <div class="project-left">
         <div class="project-title">基于 MLLM 的<br>工业缺陷检测 Web App</div>
         <div class="project-title-en"><em>Multimodal LLM for industrial inspection.</em></div>
         <div class="project-meta">
-          <div class="project-meta-row"><span class="label">Period</span><span class="value">2026 · 进行中</span></div>
+          <div class="project-meta-row"><span class="label">Period</span><span class="value">2026 · 已完成答辩</span></div>
           <div class="project-meta-row"><span class="label">Role</span><span class="value">独立完成</span></div>
-          <div class="project-meta-row"><span class="label">Status</span><span class="value">In Progress</span></div>
+          <div class="project-meta-row"><span class="label">Status</span><span class="value">Defense Completed</span></div>
         </div>
       </div>
       <div class="project-right">
@@ -1879,7 +2011,7 @@
               TECHNICAL DOSSIER · FILE №. 04.MLLM
               <span class="cn">技术档案 · 工业缺陷检测系统</span>
             </div>
-            <div class="tech-dossier-header-right">In Progress</div>
+            <div class="tech-dossier-header-right">Completed</div>
           </div>
 
           <div class="tech-spec">
@@ -1906,7 +2038,7 @@
             <div class="tech-spec-value">北京工业大学 · 计算机学院</div>
 
             <div class="tech-spec-label">DEFENSE<span class="cn">答辩</span></div>
-            <div class="tech-spec-value">预计 2027 年春</div>
+            <div class="tech-spec-value">已完成答辩 · 2026</div>
           </div>
 
           <div class="tech-dossier-right">
@@ -1920,7 +2052,7 @@
             </p>
 
             <p>
-              项目持续推进中——这部分将随着研发进度，<em>陆续在网站上更新</em>：技术选型对比、Web App 原型 Demo、关键代码片段、最终成果可视化。
+              毕业论文答辩已完成。这部分后续仍会随着整理进度，<em>陆续在网站上补充</em>：技术选型对比、Web App 原型 Demo、关键代码片段与最终成果可视化。
             </p>
 
             <div class="tech-demo-frame" style="padding: 14px; background: var(--paper); border-radius: 6px; overflow: hidden;">
@@ -1975,6 +2107,150 @@
             <span class="cn">· 查看完整项目文档（飞书）</span>
             <span class="arrow">→</span>
           </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project vi. Sonic Grove -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">vi.</div>
+        <div class="project-tag">
+          MUSIC UX · H5 DEMO
+          <span>腾讯音乐黑客松 / AI 睡前音乐陪伴</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">Sonic Grove · 声息花园</div>
+        <div class="project-title-en"><em>AI Sleep Music Companion</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Type</span><span class="value">腾讯音乐黑客松作品 / H5 Demo / Music UX</span></div>
+          <div class="project-meta-row"><span class="label">Position</span><span class="value">一款 AI 驱动的睡前音乐陪伴产品</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">产品概念 / 用户路径 / 交互文案 / Prompt Workflow / 视觉设定 / Demo 策划</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="project-body">
+          <p><strong>声息花园 Sonic Grove</strong> 面向睡前场景，试着解决年轻用户在信息过载、睡前焦虑和失眠反刍里反复遇到的“选择疲劳”。当人最需要被音乐陪伴时，往往最不想再打开 App、搜索歌单、继续做选择。</p>
+          <p>产品把“挑选音乐”这一步拿掉。用户只需和森林精灵「夜渡」聊几句，AI 便解析当下的情绪、能量与目标，生成一张当晚专属的<strong>「花语黑胶」</strong>：包含标题、植物封面、A/B 面声景与一句唱片侧记，让结果像一份可以收藏的夜间档案，而不是一次普通推荐。</p>
+          <p>A 面用于承接与落地，把用户熟悉的歌曲做低刺激睡眠化处理；B 面用于退场，让旋律逐渐隐去，只留下雨声、风铃、海浪或木纹室内声，最后自动静音停止。它不是另一个白噪音产品，而更像一次<em>AI 生成的睡前声音仪式</em>。</p>
+        </div>
+        <div class="project-results">
+          <div class="pres-item">
+            <div class="pres-num">A / B</div>
+            <div class="pres-label">SOUND JOURNEY<span class="cn">双面声音旅程</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">LOW</div>
+            <div class="pres-label">CHOICE LOAD<span class="cn">低负担交互入口</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">H5</div>
+            <div class="pres-label">DEMO<span class="cn">可体验原型</span></div>
+          </div>
+        </div>
+        <div class="visual-grid layout-3-stack">
+          <div class="slot slot-image" style="aspect-ratio: 4/5; padding: 0; background: var(--paper); border: 1px solid var(--ink); overflow: hidden;">
+            <img src="assets/nova/sonic-grove.png" alt="Sonic Grove 声息花园手机交互封面" class="slot-media-img">
+          </div>
+          <div class="slot slot-text slot-text-stat">
+            <div>
+              <div class="slot-text-label">CORE RITUAL<span class="cn">核心仪式</span></div>
+              <div class="stat-num-big">Night <em>Vinyl</em></div>
+              <div class="stat-cap">从聊天到唱片封面，再到 A/B 面声景退场</div>
+            </div>
+          </div>
+          <div class="slot slot-quote">
+            <div class="slot-quote-text">
+              与其让用户再选一首歌，不如替他生成一个更柔软的入睡入口。
+              <span class="cn">A bedtime ritual, not another playlist picker.</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://sonic-grove.pages.dev/" target="_blank" rel="noopener" class="hackathon-link">
+            VIEW DEMO
+            <span class="cn">· 查看 Demo</span>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://gcnc1ndcwmfy.feishu.cn/wiki/AibawIXNXiO6QSkLGfBcmFh6neK" target="_blank" rel="noopener" class="hackathon-link light">
+            PROCESS NOTES
+            <span class="cn">· 查看过程记录</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project vii. Heartlight -->
+    <div class="project reveal">
+      <div class="project-num-block">
+        <div class="project-num">vii.</div>
+        <div class="project-tag">
+          EMOTIONAL UX · PROMPT STUDY
+          <span>AI 情感交互研究 / 长期体验观察</span>
+        </div>
+      </div>
+      <div class="project-left">
+        <div class="project-title">心光 · AI 情感交互与提示词实验</div>
+        <div class="project-title-en"><em>AI Emotional Interaction &amp; Prompt Study</em></div>
+        <div class="project-meta">
+          <div class="project-meta-row"><span class="label">Type</span><span class="value">AI Emotional Interaction Study / Prompt Design / AI Companion UX</span></div>
+          <div class="project-meta-row"><span class="label">Position</span><span class="value">一次围绕 AI 情感陪伴体验的交互观察与提示词实验</span></div>
+          <div class="project-meta-row"><span class="label">Role</span><span class="value">AI 使用观察 / Prompt 设计 / 情感交互分析 / 对话结构整理 / 方法论沉淀</span></div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="project-body">
+          <p>这个项目借助 AI 日记产品做长期使用观察与 Prompt 实验。我以真实使用场景为样本，记录人在焦虑、低落、关系困惑或自我怀疑时，如何向 AI 寻求回应、安慰与行动建议，并持续比较不同表达方式带来的交互感受。</p>
+          <p>关注点并不是“让 AI 替代人”，而是观察它在情感场景里怎样回答，才会让人感到被理解，同时又保持边界感。相比情绪宣泄本身，我更在意语言温度、陪伴感、安全提醒，以及一句回复是否真的能帮助人往前走一点。</p>
+          <p>最后我把对话结构归纳为三个阶段：<strong>先承接情绪，再澄清问题，最后转成一个可完成的小行动</strong>。展示中使用的是脱敏截图、局部界面与 Prompt 卡片，避免暴露过度私人的原始对话内容。</p>
+        </div>
+        <div class="project-results">
+          <div class="pres-item">
+            <div class="pres-num">3</div>
+            <div class="pres-label">STEPS<span class="cn">承接—澄清—行动</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">SAFE</div>
+            <div class="pres-label">BOUNDARY<span class="cn">边界感与提醒</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">PROMPT</div>
+            <div class="pres-label">METHOD<span class="cn">提示词结构法</span></div>
+          </div>
+          <div class="pres-item">
+            <div class="pres-num">LONG</div>
+            <div class="pres-label">TERM STUDY<span class="cn">长期体验观察</span></div>
+          </div>
+        </div>
+        <div class="project-tag-row">
+          <span class="tech-chip">Prompt Design</span>
+          <span class="tech-chip">Emotional UX</span>
+          <span class="tech-chip">AI Companion</span>
+          <span class="tech-chip">Interaction Writing</span>
+          <span class="tech-chip">User Insight</span>
+          <span class="tech-chip">AI Safety Boundary</span>
+        </div>
+        <div class="visual-grid layout-2-equal">
+          <div class="slot slot-image" style="padding: 0; background: var(--paper); border: 1px solid var(--ink); overflow: hidden;">
+            <img src="assets/nova/heartlight01.jpg" alt="心光项目界面脱敏截图一" class="slot-media-img">
+          </div>
+          <div class="slot slot-image" style="padding: 0; background: var(--paper); border: 1px solid var(--ink); overflow: hidden;">
+            <img src="assets/nova/heartlight02.jpg" alt="心光项目界面脱敏截图二" class="slot-media-img">
+          </div>
+        </div>
+        <div class="project-pull-horizontal">
+          <div class="pull-quote-mark">"</div>
+          <div class="pull-quote-content">
+            <div class="pull-quote-text">我关心的不是 AI 像不像人，而是它有没有把复杂情绪说得更清楚、更克制，也更有用。</div>
+            <div class="pull-quote-en">Not human-like, but clearer, gentler, and more useful in a human moment.</div>
+          </div>
+          <div class="pull-quote-tags">
+            <span>情感交互研究</span>
+            <span>Prompt 方法论</span>
+            <span>脱敏展示</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2089,6 +2365,31 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  (function() {
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canHover || reduceMotion) return;
+
+    const cards = document.querySelectorAll('.project-results, .tech-dossier, .project-pull-horizontal, .cert-card, .slot');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rx = (0.5 - py) * 3.2;
+        const ry = (px - 0.5) * 4.2;
+
+        card.style.setProperty('--mx', `${px * 100}%`);
+        card.style.setProperty('--my', `${py * 100}%`);
+        card.style.transform = `perspective(1200px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-3px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  })();
 </script>
 
 </body>
